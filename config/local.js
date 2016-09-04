@@ -30,7 +30,7 @@
 module.exports = {
 
     port: process.env.OPENSHIFT_NODEJS_PORT || 1337,
-    host: process.env.OPENSHIFT_NODEJS_IP || 'localhost',
+    host: process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
     environment: process.env.NODE_ENV || 'development',
 
     hookTimeout: 30000, // 30 seconds
@@ -63,7 +63,7 @@ module.exports = {
         connections: {
             mongodb: {
                 adapter: 'sails-mongo',
-                host: process.env.OPENSHIFT_MONGODB_DB_HOST || 'localhost', // defaults to `localhost` if omitted
+                host: process.env.OPENSHIFT_MONGODB_DB_HOST || '127.0.0.1', // defaults to `localhost` if omitted
                 port: process.env.OPENSHIFT_MONGODB_DB_PORT || '27017', // defaults to 27017 if omitted
                 user: process.env. OPENSHIFT_MONGODB_DB_USERNAME || null, // or omit if not relevant
                 password: process.env. OPENSHIFT_MONGODB_DB_PASSWORD || null, // or omit if not relevant

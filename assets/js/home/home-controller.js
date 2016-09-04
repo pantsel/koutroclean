@@ -9,7 +9,7 @@ angular.module('app.home', [])
   .controller('HomeController', ['$scope','InitializationService','DataService',
     function($scope,InitializationService,DataService) {
 
-        $('<img/>').attr('src', '../images/bg_grass.jpg').load(function() {
+        $('<img/>').attr('src', '../images/bg_grass.jpg').on('load',function() {
             $(this).remove();
 
             $('.section-header').css('background', 'url(../images/bg_grass.jpg) no-repeat center center fixed');

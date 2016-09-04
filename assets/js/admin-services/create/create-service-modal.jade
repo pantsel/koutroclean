@@ -1,0 +1,43 @@
+.modal-header
+    h3.modal-title Δημιουργία/Επεξεργασία υπηρεσίας
+.modal-body
+    .form-horizontal(novalidate='')
+        fieldset
+            // Version Name
+            .form-group
+                label.col-md-4.control-label(for='title') Τίτλος
+                .col-md-7
+                    input.form-control.input-md(
+                    ng-model='service.title',
+                    name='title',
+                    required)
+
+            // Select Channel
+            .form-group
+                label.col-md-4.control-label(for='description') Περιγραφή
+                .col-md-7
+                    textarea.form-control(
+                    ng-model='service.description',
+                    name='description',
+                    required
+                    )
+            // Platforms
+            .form-group
+                label.col-md-4.control-label Λεπτομέρειες
+                .col-md-7
+                    p
+                        button.btn.btn-sm.btn-success(ng-click="addListDetail()")
+                            i.fa.fa-plus
+                            | &nbsp;Νέα λεπτομέρεια
+                    p.flex(ng-repeat="item in service.details")
+                        input.form-control(
+                        ng-model='service.details[$index].content'
+                        )
+                        button.btn.btn-danger(type="button",ng-click="removeDetail($index)")
+                            i.fa.fa-remove
+        //pre {{service | json}}
+
+.modal-footer
+    div
+        button.btn.btn-success(type='button', ng-click='submit()') Αποθήκευση
+        button.btn.btn-danger(type='button', ng-click='closeModal()') Άκυρο

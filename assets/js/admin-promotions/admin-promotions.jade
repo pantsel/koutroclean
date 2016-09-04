@@ -1,0 +1,44 @@
+.container.admin-promotions
+    .row
+        .col-md-12
+            h3
+                | ΠΑΚΕΤΑ ΠΡΟΣΦΟΡΩΝ &nbsp;
+                i.fa.fa-spinner.fa-spin(ng-show="loadingData")
+    .row
+        .col-md-4.promotion-box(ng-repeat="promotion in promotions")
+            .inner.panel.panel-default
+                .panel-heading
+                    .h3.panel-title {{promotion.slot.toUpperCase()}}
+                .panel-body
+                    .form-group
+                        .input-group
+                            span.input-group-addon &euro;
+                            input.form-control(type="number",placeholder="πχ. 60",ng-model="promotion.price.value")
+                            span.input-group-addon /μήνα
+                    .form-group
+                        label Χρέωση ανά:
+                        select.form-control(ng-model="promotion.chargeInterval")
+                            option(value="month") μήνα
+                            option(value="twomonths") δίμηνο
+                            option(value="threemonths") τρίμηνο
+                            option(value="sixmonths") εξάμηνο
+                            option(value="year") έτος
+                    p
+                        a(href="#",ng-click="addPromotionDetail(promotion)")
+                            i.fa.fa-plus-circle
+                            | &nbsp; Νέα λέπτομέρεια
+                    p.flex(ng-repeat="item in promotion.details")
+                        input.form-control(
+                        ng-model='promotion.details[$index].content'
+                        )
+                        button.btn.btn-danger(type="button",ng-click="removeDetail(promotion,$index)")
+                            i.fa.fa-remove
+                .panel-footer
+                    button.btn.btn-success.btn-block(ng-click="savePromotion(promotion)") Αποθήκευση αλλαγών
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+.container.admin-services
+    .row
+        .col-md-12
+            h3 ΥΠΗΡΕΣΙΕΣ
+            div.actions.clearfix
+                button.btn.btn-success(ng-click="onCreateService()") Νέα Υπηρεσία
+    .row
+        .col-md-12
+            table.table.table-condensed.table-striped
+                tr
+                    th
+                    th Τίτλος
+                    th Περιγραφή
+                    th(width="1") Σειρά παρουσίασης
+                    th
+                tr(data-ng-repeat="service in services")
+                    td {{$index+1}}.
+                    td {{service.title}}
+                    td {{service.description}}
+                    td
+                        input.form-control(type="number",ng-model="service.ordering",ng-keypress="($event.which === 13)?updateService(service):0")
+                    td(width="1")
+                        .flex
+                            button.btn.btn-warning(ng-click="onUpdateService(service,$index)")
+                                i.fa.fa-edit
+                            | &nbsp;
+                            button.btn.btn-danger(ng-click="deleteService(service,$index)")
+                                i.fa.fa-remove
+
+
+
+

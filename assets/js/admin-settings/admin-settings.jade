@@ -1,0 +1,93 @@
+.container
+    .row
+        .col-md-12
+            h3.admin-page-header ΡΥΘΜΙΣΕΙΣ
+            div.actions
+                button.btn.btn-success(ng-click="saveSettings()") Αποθήκευση αλλαγών
+    .row
+        .col-md-12
+            .form-horizontal(novalidate='')
+                fieldset
+                    .col-md-6
+                        h4 Kοινωνικά δίκτυα
+                        br
+                        .form-group
+                            label.bg-grey.col-md-4.control-label(for='facebook')
+                                i.fa.fa-facebook
+                                | &nbsp;&nbsp;&nbsp;&nbsp;Facebook
+                            .col-md-7
+                                input.form-control.input-md(
+                                ng-model='settings.social.facebook',
+                                name='facebook')
+                        .form-group
+                            label.bg-grey.col-md-4.control-label(for='twitter')
+                                i.fa.fa-twitter
+                                | &nbsp;&nbsp;&nbsp;&nbsp;Twitter
+                            .col-md-7
+                                input.form-control.input-md(
+                                ng-model='settings.social.twitter',
+                                name='twitter')
+                        .form-group
+                            label.bg-grey.col-md-4.control-label(for='youtube')
+                                i.fa.fa-youtube
+                                | &nbsp;&nbsp;&nbsp;&nbsp;Youtube
+                            .col-md-7
+                                input.form-control.input-md(
+                                ng-model='settings.social.youtube',
+                                name='youtube')
+                        .form-group
+                            label.bg-grey.col-md-4.control-label(for='linkedin')
+                                i.fa.fa-linkedin
+                                | &nbsp;&nbsp;&nbsp;&nbsp;Linkedin
+                            .col-md-7
+                                input.form-control.input-md(
+                                ng-model='settings.social.linkedin',
+                                name='linkedin')
+                        .form-group
+                            label.bg-grey.col-md-4.control-label(for='pinterest')
+                                i.fa.fa-pinterest
+                                | &nbsp;&nbsp;&nbsp;&nbsp;Pinterest
+                            .col-md-7
+                                input.form-control.input-md(
+                                ng-model='settings.social.pinterest',
+                                name='pinterest')
+                        .form-group
+                            label.bg-grey.col-md-4.control-label(for='skype')
+                                i.fa.fa-skype
+                                | &nbsp;&nbsp;&nbsp;&nbsp;Skype
+                            .col-md-7
+                                input.form-control.input-md(
+                                ng-model='settings.social.skype',
+                                name='skype')
+                    .col-md-6
+                        h4 Πληροφορίες
+                        br
+                        .form-group
+                            label.bg-grey.col-md-4.control-label(for='address')
+                                i.fa.fa-map-marker
+                                | &nbsp;&nbsp;&nbsp;&nbsp;Διεύθυνση
+                            .col-md-7
+                                input.form-control.input-md(
+                                ng-model='settings.address',
+                                name='address')
+                        .form-group
+                            label.bg-grey.col-md-4.control-label(for='phone')
+                                i.fa.fa-phone
+                                | &nbsp;&nbsp;&nbsp;&nbsp;Τηλέφωνο
+                            .col-md-7
+                                input.form-control.input-md(
+                                ng-model='settings.phone',
+                                name='phone')
+                        .form-group
+                            label.bg-grey.col-md-4.control-label(for='email')
+                                i.fa.fa-envelope
+                                | &nbsp;&nbsp;&nbsp;&nbsp;Email
+                            .col-md-7
+                                input.form-control.input-md(
+                                ng-model='settings.email',
+                                name='email')
+
+
+
+
+

@@ -1,0 +1,7 @@
+{
+  "imeId" : "7020",
+  "authServer" : {
+    "baseUrl" : "http://web.ime.local",
+    "authUrl" : "http://web.ime.local/jwt/authenticate"
+  }
+}

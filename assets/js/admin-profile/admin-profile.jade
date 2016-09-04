@@ -1,0 +1,10 @@
+.container
+    .row
+        .col-md-12
+            h3.admin-page-header ΠΡΟΦΙΛ
+            div.actions
+                button.btn.btn-success(ng-click="saveProfile()") Αποθήκευση αλλαγών
+            form
+                textarea(ui-tinymce,ng-model="tinymceModel",rows="20")
+
+

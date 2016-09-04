@@ -1,0 +1,38 @@
+.admin-page-header{
+  margin-bottom: 0.5em;
+}
+
+.admin-home{
+  .section-button-inner{
+    background-color: #eaeaea;
+    border:1px solid #ddd;
+    margin: 1em;
+    padding:1em;
+    cursor: pointer;
+
+    i{
+      margin-bottom: 0.3em;
+    }
+  }
+
+  .section-button-inner:hover{
+    color: $brand-info !important;
+    h4 {
+      color: $brand-info !important;
+    }
+  }
+}
+
+.admin-promotions {
+  .promotion-box {
+    padding: 1em;
+
+    .inner{
+
+    }
+  }
+}
+
+.actions{
+  margin-bottom: 16px;
+}

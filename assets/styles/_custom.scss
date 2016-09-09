@@ -278,7 +278,7 @@ textarea {
   margin: 0 auto;
   border-left: 24px solid transparent;
   border-right: 24px solid transparent;
-  border-bottom: 24px solid $green;
+  border-bottom: 24px solid $dark-green;
   transition: all 0.3s;
 }
 
@@ -615,6 +615,8 @@ input[type="number"].ng-invalid {
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     padding: 1em;
+    font-family: $font-family-sans-serif !important;
+
 
     img{
       margin-right: 1em;
@@ -690,9 +692,11 @@ input[type="number"].ng-invalid {
   min-height: 120px;
   margin-top:-2px;
   background-color: $green;
+  border-top: 10px solid $dark-green;
+  border-bottom: 10px solid $dark-green;
 
   .services-pic{
-    padding: 1em;
+    padding: 0;
   }
   .sub-head{
     margin-bottom: 1.5em;

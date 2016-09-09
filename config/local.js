@@ -29,9 +29,9 @@
 
 module.exports = {
 
-    port: process.env.OPENSHIFT_NODEJS_PORT || 1337,
-    host: process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
-    environment: process.env.NODE_ENV || 'development',
+    port: process.env.PORT || 1337,
+    host: process.env.IP || '127.0.0.1',
+    environment: process.env.ENV || 'development',
 
     hookTimeout: 30000, // 30 seconds
 
@@ -39,7 +39,7 @@ module.exports = {
     // The full base url at which your site will be primarily available.
     // Include an http:// prefix
     // ex. 'http://my-site.com'
-    appUrl: "http://" + process.env.OPENSHIFT_APP_DNS || 'http://localhost:1337',
+    appUrl: process.env.APP_URL || 'http://localhost:1337',
 
     auth: {
         // Provide a set of credentials that can be used to access the admin interface.
@@ -63,10 +63,10 @@ module.exports = {
         connections: {
             mongodb: {
                 adapter: 'sails-mongo',
-                host: process.env.OPENSHIFT_MONGODB_DB_HOST || '127.0.0.1', // defaults to `localhost` if omitted
-                port: process.env.OPENSHIFT_MONGODB_DB_PORT || '27017', // defaults to 27017 if omitted
-                user: process.env. OPENSHIFT_MONGODB_DB_USERNAME || null, // or omit if not relevant
-                password: process.env. OPENSHIFT_MONGODB_DB_PASSWORD || null, // or omit if not relevant
+                host: process.env.MONGODB_DB_HOST || '127.0.0.1', // defaults to `localhost` if omitted
+                port: process.env.MONGODB_DB_PORT || '27017', // defaults to 27017 if omitted
+                user: process.env. MONGODB_DB_USERNAME || null, // or omit if not relevant
+                password: process.env. MONGODB_DB_PASSWORD || null, // or omit if not relevant
                 database: 'koutrocleandemo' // or omit if not relevant
             }
         },
@@ -75,12 +75,12 @@ module.exports = {
             // Recommended: 63 random alpha-numeric characters
             // Generate using: https://www.grc.com/passwords.htm
             adapter : 'connect-mongo',
-            url: process.env.OPENSHIFT_MONGODB_DB_URL ? process.env.OPENSHIFT_MONGODB_DB_URL + "koutrocleandemo" : "mongodb://@localhost:27017/koutrocleandemo",
+            url: process.env.MONGODB_DB_URL ? process.env.MONGODB_DB_URL + "koutrocleandemo" : "mongodb://@localhost:27017/koutrocleandemo",
             secret: 'cdf93c72c05f104f6183613e2f8262c2',
             database: 'koutrocleandemo',
-            host: process.env.OPENSHIFT_MONGODB_DB_HOST || 'localhost',
-            user: process.env. OPENSHIFT_MONGODB_DB_USERNAME || null, // or omit if not relevant
-            password: process.env. OPENSHIFT_MONGODB_DB_PASSWORD || null, // or omit if not relevant
+            host: process.env.MONGODB_DB_HOST || 'localhost',
+            user: process.env. MONGODB_DB_USERNAME || null, // or omit if not relevant
+            password: process.env. MONGODB_DB_PASSWORD || null, // or omit if not relevant
             collection: 'sessions',
             auto_reconnect: false,
             ssl: false,

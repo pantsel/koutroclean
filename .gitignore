@@ -123,3 +123,4 @@ nbproject
 .idea
 .node_history
 /assets/bower_components/
+/.env

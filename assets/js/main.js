@@ -77,10 +77,10 @@ angular.module('app', [
     function($scope, AuthService, $location,$document,$route) {
       $scope.isAuthenticated = AuthService.isAuthenticated;
 
-      $scope.isMenuVisible = false;
-      $scope.toggleMenu = function(){
-        $scope.isMenuVisible = !$scope.isMenuVisible;
-      }
+      //$scope.isMenuVisible = false;
+      //$scope.toggleMenu = function(){
+      //  $scope.isMenuVisible = !$scope.isMenuVisible;
+      //}
 
 
       $scope.$location = $location;
@@ -100,6 +100,10 @@ angular.module('app', [
         return window.innerWidth <= 500
       }
 
+      $scope.isShort = function() {
+        return window.innerHeight <= 500
+      }
+
 
       $scope.activeSection = "";
       $scope.scrollTo = function(id){
@@ -109,11 +113,14 @@ angular.module('app', [
         $document.scrollToElement(someElement, offset, 1000).then(function() {
           $scope.activeSection = id
         });
+        $scope.navCollapsed = true
       }
 
       $scope.scrollTop = function(){
+        $scope.navCollapsed = true
         $document.scrollTop(0, 1000).then(function() {
           $scope.activeSection = ""
+
         });
       }
 

@@ -6,6 +6,7 @@ angular.module('app.core.dependencies', [
     'ngFileUpload',
     'ui-notification',
     'ui.bootstrap',
+    'ui.bootstrap.collapse',
     'angular-confirm',
     'PubSub',
     'angularMoment'

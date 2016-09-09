@@ -5,8 +5,20 @@ body{
   padding-top: 60px;
 }
 
+
+
 h1,h2,h3,h4{
   color: $dark-grey;
+}
+
+.header-narrow{
+
+  font-size: 28px !important;
+}
+
+.img-building-narrow {
+  height: 200px;
+
 }
 
 html,body{
@@ -603,7 +615,7 @@ input[type="number"].ng-invalid {
     margin-top: 1em;
 
     a{
-      margin-right: 1em;
+      margin-right: 0.8em;
     }
 
     a:hover{
@@ -614,12 +626,18 @@ input[type="number"].ng-invalid {
   .bio{
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    padding: 1em;
+    padding: 1em 0;
     font-family: $font-family-sans-serif !important;
 
 
     img{
       margin-right: 1em;
+      margin-bottom: 1em;
+    }
+
+    img.img-responsive{
+      margin-right: 0 !important;
+      width: 100% !important;
     }
 
     p{

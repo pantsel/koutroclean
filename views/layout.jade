@@ -25,7 +25,7 @@ html
       .navbar.navbar-default.navbar-fixed-top(role='navigation',ng-show="$location.$$path == '/'")
         .container-fluid
           .navbar-header
-            button.navbar-toggle.collapsed(ng-click="toggleMenu()")
+            button.navbar-toggle.collapsed(ng-init="navCollapsed = true",ng-click="navCollapsed = !navCollapsed")
               span.icon-bar
               span.icon-bar
               span.icon-bar
@@ -33,7 +33,7 @@ html
               img.navbar-logo(src='images/koutro-logo_white.png')
             a.navbar-brand(href='#',ng-click="scrollTop()")
               span BCGS
-          .collapse.navbar-collapse
+          .collapse.navbar-collapse(uib-collapse="navCollapsed")
             ul.nav.navbar-nav.navbar-right
               li
                 a(href="#",ng-click="scrollTo('about')",ng-class="{'active':activeSection == 'about'}") ΠΡΟΦΙΛ

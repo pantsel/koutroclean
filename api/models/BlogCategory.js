@@ -1,7 +1,9 @@
-// api/models/Promotion.js
+var slugify = require('slugify')
+
 module.exports = {
     attributes: {
         title : 'string',
+        alias : 'string',
         description : 'string',
         posts: {
             collection: 'blogpost',
@@ -16,13 +18,30 @@ module.exports = {
             defaultsTo: function() {return new Date();}
         }
     },
+    beforeCreate:function(values,next) {
+        values.alias = slugify(values.title)
+        next();
+    },
     beforeUpdate:function(values,next) {
+        values.alias = slugify(values.title)
         values.updatedAt= new Date();
         next();
     },
     seedData:[
         {
             title: 'Νέα',
+            description : 'Τα νέα της εταιρείας μας',
+        },
+        {
+            title: 'Καθαριότητα',
+            description : '',
+        },
+        {
+            title: 'Συμβουλές',
+            description : 'Τα νέα της εταιρείας μας',
+        },
+        {
+            title: 'Γενικά',
             description : 'Τα νέα της εταιρείας μας',
         }]
 };

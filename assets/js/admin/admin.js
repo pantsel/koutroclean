@@ -1,9 +1,11 @@
 angular.module('app.admin',[
+    'ngFileUpload',
     'app.admin.profile',
     'app.admin.settings',
     'app.admin.services',
     'app.admin.create-service-modal',
     'app.admin.promotions',
+    'app.admin.blog',
     'app.admin.create-promotions-modal'
 ])
     .config(['$routeProvider', function($routeProvider) {

@@ -17,6 +17,7 @@ module.exports.bootstrap = function(cb) {
 
   async.series([
     Promotions.seed,
-    BlogCategory.seed
+    BlogCategory.seed,
+    BlogPost.seed
   ],cb);
 };

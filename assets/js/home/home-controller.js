@@ -1,13 +1,13 @@
-angular.module('app.home', [])
+angular.module('app.home', ['uiGmapgoogle-maps',])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'js/home/home.html',
-        controller: 'HomeController as vm'
+        controller: 'HomeController as vm',
       });
   }])
-  .controller('HomeController', ['$scope','InitializationService','DataService',
-    function($scope,InitializationService,DataService) {
+  .controller('HomeController', ['$scope','InitializationService','DataService','$uibModal','$log',
+    function($scope,InitializationService,DataService,$uibModal,$log) {
 
         $('<img/>').attr('src', '../images/bg_grass.jpg').on('load',function() {
             $(this).remove();
@@ -20,7 +20,11 @@ angular.module('app.home', [])
             $('.init-hidden').css('display','block')
             $(".initialization-spinner-wrapper").hide()
 
-            reveal()
+            try{
+                reveal()
+            }catch(err){}
+
+
 
 
         });
@@ -37,6 +41,9 @@ angular.module('app.home', [])
             $scope.home = response.data
         })
 
+
+
+
         DataService.getServices().then(function(response){
             $scope.services = response.data
             $scope.services.sort(function(a, b){
@@ -50,6 +57,18 @@ angular.module('app.home', [])
             $scope.promotions.sort(function(a, b){
                 return a.ordering - b.ordering;
             });
+        })
+
+        DataService.queryPosts({
+            page : 1,
+            perPage : 4
+        }).then(function(success){
+
+            console.log("Retrieved posts!",success)
+            $scope.posts = success.data.posts
+            $scope.pagination = success.data.meta.paginate
+        }).catch(function(error){
+
         })
 
         $scope.map = { center: { latitude: 38.000199, longitude: 23.772889 }, zoom: 16 };
@@ -99,6 +118,38 @@ angular.module('app.home', [])
         }
 
 
+        $scope.openPromotionModal = function(promotion) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: '/js/home/promotion-modal.html',
+                controller: function($uibModalInstance,promotion){
+                    var $ctrl = this
+                    $ctrl.promotion = promotion
+                    $ctrl.ok = function () {
+                        $uibModalInstance.close();
+                    };
+
+                    $ctrl.cancel = function () {
+                        $uibModalInstance.dismiss('cancel');
+                    };
+
+                    $ctrl.contact = {
+                        name : '',
+                        phone: '',
+                        hours: 'morning'
+                    }
+                },
+                controllerAs: '$ctrl',
+                size: 'md',
+                resolve: {
+                    promotion: function () {
+                        return promotion;
+                    }
+                }
+            });
+        }
 
 
 

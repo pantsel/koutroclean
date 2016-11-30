@@ -2,8 +2,9 @@ angular.module('app', [
     'app.core',
     'app.admin',
     'app.home',
+    'app.blog',
+    'app.blog.post',
     'duScroll',
-    'uiGmapgoogle-maps',
     'ui.router',
     'ui.tinymce'
   ])
@@ -73,19 +74,10 @@ angular.module('app', [
 
     }
   ])
-  .controller('MainController', ['$scope', 'AuthService', '$location','$document','$route',
-    function($scope, AuthService, $location,$document,$route) {
+  .controller('MainController', ['$scope', 'AuthService', '$location','DataService','$log',
+    function($scope, AuthService, $location,DataService, $log) {
       $scope.isAuthenticated = AuthService.isAuthenticated;
-
-      //$scope.isMenuVisible = false;
-      //$scope.toggleMenu = function(){
-      //  $scope.isMenuVisible = !$scope.isMenuVisible;
-      //}
-
-
       $scope.$location = $location;
-
-
 
       $scope.isActive = function(path) {
         return $location.path() == path
@@ -104,48 +96,25 @@ angular.module('app', [
         return window.innerHeight <= 500
       }
 
+      DataService.getSettings().then(function(response){
+        $log.debug('Retrieved Settings: ',response)
+        $scope.settings = response.data
 
-      $scope.activeSection = "";
-      $scope.scrollTo = function(id){
-        $scope.isMenuVisible = false;
-        var offset = 50;
-        var someElement = angular.element(document.getElementById(id));
-        $document.scrollToElement(someElement, offset, 1000).then(function() {
-          $scope.activeSection = id
-        });
-        $scope.navCollapsed = true
-      }
+        $scope.socials = []
 
-      $scope.scrollTop = function(){
-        $scope.navCollapsed = true
-        $document.scrollTop(0, 1000).then(function() {
-          $scope.activeSection = ""
-
-        });
-      }
+        Object.keys($scope.settings.social).forEach(function(key){
+          $scope.socials.push({
+            icon : key,
+            link : ( $scope.settings.social[key].indexOf("http://") < 0 || $scope.settings.social[key].indexOf("https://") < 0 )? "http://" + $scope.settings.social[key] : $scope.settings.social[key]
+          })
+        })
+      })
 
 
-      $scope.socials = [
-        {
-          icon : 'facebook',
-          link :'#'
-        },{
-          icon : 'twitter',
-          link :'#'
-        },{
-          icon : 'linkedin',
-          link :'#'
-        },{
-          icon : 'youtube',
-          link :'#'
-        },{
-          icon : 'pinterest',
-          link :'#'
-        },{
-          icon : 'skype',
-          link :'#'
-        }
-      ]
+      
+
+
+
 
 
     }

@@ -3,7 +3,6 @@ angular.module('app.core.dependencies', [
     'ngAnimate',
     'ngMessages',
     'ngSanitize',
-    'ngFileUpload',
     'ui-notification',
     'ui.bootstrap',
     'ui.bootstrap.collapse',

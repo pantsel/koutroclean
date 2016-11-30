@@ -65,4 +65,22 @@ module.exports.policies = {
     retrieveEmail : 'authToken',
     deleteEmail : 'authToken'
   },
+
+  BlogPostsController : {
+    query : true,
+    getById : true,
+    getByAlias : true,
+    image : true,
+    delete : 'authToken',
+    create : 'authToken',
+    update : 'authToken'
+  },
+
+  BlogCategoriesController : {
+    query : true,
+    getById : true,
+    delete : 'authToken',
+    create : 'authToken',
+    update : 'authToken'
+  },
 };

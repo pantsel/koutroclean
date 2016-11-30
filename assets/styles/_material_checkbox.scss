@@ -1,0 +1,56 @@
+
+
+
+/* basic css */
+input[type=checkbox]   { display:none; }
+.cbl               { padding-left:10px; }
+
+/* checkbox css */
+.cbl                  { cursor:pointer; }
+.cbl span             { display:block; position:absolute; left:0;
+  -webkit-transition-duration:0.3s; -moz-transition-duration:0.3s; transition-duration:0.3s;
+}
+
+.cbl .box     {
+  border:2px solid #000;
+  height:20px;
+  width:20px;
+  z-index:888;
+  -webkit-transition-delay:0.2s; -moz-transition-delay:0.2s; transition-delay:0.2s;
+}
+.cbl .check         {
+  top: -7px;
+  left: 6px;
+  width: 12px;
+  height: 24px;
+  border:2px solid $green;
+  border-top: none;
+  border-left: none;
+  opacity:0;
+  z-index:888;
+  -webkit-transform:rotate(180deg); -moz-transform:rotate(180deg); transform:rotate(180deg);
+  -webkit-transition-delay:0.3s; -moz-transition-delay:0.3s; transition-delay:0.3s;
+}
+
+/* handling click events */
+
+input[type=checkbox]:checked ~ .cbl .box {
+  opacity:0;
+  -webkit-transform   :scale(0) rotate(-180deg);
+  -moz-transform 		:scale(0) rotate(-180deg);
+  transform 				:scale(0) rotate(-180deg);
+}
+input[type=checkbox]:checked ~ .cbl .check {
+  opacity:1;
+  -webkit-transform   :scale(1) rotate(45deg);
+  -moz-transform      :scale(1) rotate(45deg);
+  transform           :scale(1) rotate(45deg);
+}
+
+input[type=checkbox]  ~ .cbl {
+  font-weight: bold;
+}
+input[type=checkbox]:checked ~ .cbl {
+  color: $green;
+}
+

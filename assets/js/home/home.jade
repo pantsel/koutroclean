@@ -1,8 +1,8 @@
 .row#section-header.section-header.section-full.flex.flex-column.center-aligner
   h1.title  Νοικοκυρεμένα κτίρια!
-  h4.sub-title.margin-bottom  Building Cleaning + General Services
+  h4.sub-title.margin-bottom  Building Cleaning & General Services
   .actions.clearfix
-    a.btn.btn-white(href="#",ng-click="scrollTo('about')",ng-class="{'btn-block':isNarrow()}")
+    a.btn.btn-white(ng-controller="NavController",href="#",ng-click="scrollTo('about')",ng-class="{'btn-block':isNarrow()}")
       | ΔΕΙΤΕ ΠΕΡΙΣΣΟΤΕΡΑ
     a.btn.btn-white(href="#",ng-class="{'btn-block':isNarrow()}")
       | ΤΡΕΧΟΥΣΑ ΠΡΟΣΦΟΡΑ
@@ -11,7 +11,7 @@
   //.current-offer.clearfix
   //  h3.visible-md.visible-lg > Η ΤΡΕΧΟΥΣΑ ΠΡΟΣΦΟΡΑ ΜΑΣ <
   .scroll-down.clearfix
-    a(href="#",ng-click="scrollTo('about')")
+    a(href="#",ng-controller="NavController",ng-click="scrollTo('about')")
       i.fa.fa-angle-down.fa-2x
 .container#about.thin.section-about.section.flex.flex-column.center-aligner
   .row.section-about-inner
@@ -76,7 +76,7 @@
                 i.fa.fa-check
                 | &nbsp;&nbsp; {{promotion.details[$index].content}}
             p
-              button(ng-class="{'btn-green-inverted': promotion.slot != 'standard','btn-white': promotion.slot == 'standard'}").btn ΜΕ ΕΝΔΙΑΦΕΡΕΙ
+              button.btn(ng-click="openPromotionModal(promotion)",ng-class="{'btn-green-inverted': promotion.slot != 'standard','btn-white': promotion.slot == 'standard'}") ΜΕ ΕΝΔΙΑΦΕΡΕΙ
 
 
 
@@ -89,37 +89,23 @@ br
     .underliner
     p Εδώ θα βρείτε όλα τα άρθρα σχετικά με την εταιρεία και τη δουλειά μας
     p
-      a(href="#").btn.btn-green-inverted ΔΕΙΤΕ ΟΛΑ ΤΑ ΑΡΘΡΑ
+      a(href="/blog").btn.btn-green-inverted ΔΕΙΤΕ ΟΛΑ ΤΑ ΑΡΘΡΑ
     .row.section-content.text-left.clearfix
-      .col-md-4.blog-post
+      .col-md-4.blog-post(ng-repeat="post in posts",ng-if="$index < 2")
         .blog-post-inner
-          .category-tag ΚΑΘΑΡΙΟΤΗΤΑ
+          .category-tag {{post.category.title}}
           img.img-responsive(src="/images/buildings.jpg")
-          h4 Επικεφαλίδα άρθρου
-          p.blog-content {{ ipsum | limitTo:150 }}
+          h4 {{post.title}}
+          p.blog-content {{ post.excerpt | limitTo:150 }}
           p
-            a(href="#").btn.btn-green.btn-sm Περισσότερα...
-      .col-md-4.blog-post
-        .blog-post-inner
-          .category-tag ΝΕΑ
-          img.img-responsive(src="/images/buildings.jpg")
-          h4 Επικεφαλίδα άρθρου με αρκετούς χαρακτήρες
-          p.blog-content {{ ipsum | limitTo:150 }}
-          p
-            a(href="#").btn.btn-green.btn-sm Περισσότερα...
+            a(ng-href="/blog/posts/{{post.alias}}").btn.btn-green.btn-sm Περισσότερα...
       .col-md-4
-        .blog-post.secondary.clearfix
+        .blog-post.secondary.clearfix(ng-repeat="post in posts",ng-if="$index > 1")
           .blog-post-inner
-            .category-tag ΝΕΑ
+            .category-tag {{post.category.title}}
             img.img-responsive(src="/images/buildings.jpg")
             h4
-              a(href="#") Επικεφαλίδα άρθρου με αρκετούς χαρακτήρες
-        .blog-post.secondary.clearfix
-          .blog-post-inner
-            .category-tag ΝΕΑ
-            img.img-responsive(src="/images/buildings.jpg")
-            h4
-              a(href="#") Επικεφαλίδα άρθρου με αρκετούς χαρακτήρες
+              a(ng-href="/blog/posts/{{post.alias}}") {{post.title}}
 
 .clearfix
 .row#newsletter.section-newsletter.section.bg-green.flex.center-aligner.clearfix

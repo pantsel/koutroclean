@@ -1,0 +1,42 @@
+.container
+    .row
+        .col-md-12
+            h3.admin-page-header Επεξεργασία άρθρου
+    .row.blog-main-content
+        .col-md-3.blog-categories.bg-light-grey.padding-top-20(style="margin-top:25px")
+            .form-group
+                button.btn.btn-warning.btn-block(ngf-select, ng-model="file", name="file", ngf-pattern="'image/*'",ngf-accept="'image/*'", ngf-max-size="20MB")
+                    | Επιλέξτε εικόνα
+            img.img-responsive(ng-if="post",ngf-thumbnail="(file | ngfDataUrl) || '/posts/{{post.id}}/image'")
+            //img.img-responsive(ng-src="/posts/{{post.id}}/image")
+            br
+            .form-group
+                label Κατηγορία
+                select.form-control(ng-model="post.category", ng-options="item.id as item.title for item in categories")
+            .form-group
+                .checkbox
+                    label
+                        input(type="checkbox",ng-model="post.published")
+                        .cbl
+                            span.check
+                            span.box
+                            | Δημοσιευμένο
+            .form-group
+                button.btn.btn-block.btn-success(ng-click="update()")
+                    | Αποθήκευση αλλαγών
+
+        .col-md-9.blog-posts
+            .col-md-12
+                .form-group
+                    label Τίτλος
+                    input.form-control(ng-model="post.title")
+                .form-group
+                    label Απόσπασμα
+                    textarea(ui-tinymce="tinymceOptions",ng-model="post.excerpt",rows="5")
+                .form-group
+                    label Κείμενο
+                    textarea(ui-tinymce="tinymceOptions",ng-model="post.body",rows="20")
+
+
+
+

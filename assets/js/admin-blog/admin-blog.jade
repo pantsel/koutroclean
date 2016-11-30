@@ -1,0 +1,72 @@
+.container
+    .row
+        .col-md-12
+            h3.admin-page-header BLOG
+    .row.blog-main-content
+        .col-md-3.blog-categories.bg-light-grey
+            h4 Κατηγορίες
+            ul.list-group
+                li.list-group-item(data-ng-repeat="cat in categories")
+                    .checkbox.no-margin
+                        label
+                            input(type="checkbox",ng-change="onCategorySelected(cat)",ng-model="cat.isChecked")
+                            .cbl
+                                span.check
+                                span.box
+                                | {{cat.title}}
+
+        .col-md-9.blog-posts
+            .col-md-12(style="margin-bottom:1em")
+                form.form-inline
+                    form-group
+                        input.form-control(placeholder="Αναζητήστε άρθρα...",ng-model="postSearch",style="width:300px",ng-change="inputChanged()")
+                    | &nbsp;
+                    form-group
+                        select.form-control(ng-model="filterPublished",ng-change="queryPosts()")
+                            option(value="published") Δημοσιευμένα
+                            option(value="unpublished") Αδημοσίευτα
+                    | &nbsp;
+                    button.btn.btn-primary Νέο άρθρο
+                    | &nbsp;
+                    button.btn.btn-danger Διαγ. επιλεγμένων
+            .col-md-12
+                table.table.table-bordered.table-striped
+                    tr(style="background-color:#eaeaea")
+                        th
+                        th(style="white-space:nowrap")
+                            a(href="#",ng-click="sort('title')")
+                                i.fa.fa-sort-alpha-asc
+                                | &nbsp;&nbsp;Tίτλος
+                        th Κατηγορία
+                        th(style="white-space:nowrap")
+                            i.fa.fa-sort-amount-desc
+                            | &nbsp;&nbsp;Δημιουργήθηκε
+                        th(style="white-space:nowrap")
+                            i.fa.fa-sort-amount-desc
+                            | &nbsp;&nbsp;Ενημερώθηκε
+                        th(colspan=2)
+                    tr(ng-repeat="post in posts")
+                        td
+                            .checkbox.no-margin
+                                label
+                                    input(type="checkbox",ng-change="onPostSelected(post)",ng-model="cat.isChecked")
+                                    .cbl
+                                        span.check
+                                        span.box
+                        td {{post.title}}
+                        td {{post.category.title}}
+                        td
+                            span {{post.createdAt | amDateFormat:'DD/MM/YYYY @HH:mm'}}
+                        td
+                            span {{post.updatedAt | amDateFormat:'DD/MM/YYYY @HH:mm'}}
+                        td
+                            button.btn.btn-warning.btn-sm(ng-click="onEditPost(post)")
+                                i.fa.fa-edit
+                                | &nbsp;Επεξεργασία
+                        td
+                            button.btn.btn-sm(ng-class="{'btn-success':post.published,'btn-danger':!post.published}")
+                                i.fa.fa-circle-o
+            .col-md-12.pagi
+                ul(uib-pagination, total-items="pagination.totalCount", ng-model="pagination.currentPage", max-size="8",boundary-links="true", force-ellipses="true",ng-change="pageChanged()")
+
+

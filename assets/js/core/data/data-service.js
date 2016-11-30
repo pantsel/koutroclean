@@ -2,10 +2,10 @@ angular.module('app.core.data.service', [
     'ngSails'
   ])
   .service('DataService', [
-    '$sails', '$q', '$log', '$http', 'Notification', 'Upload', 'PubSub',
+    '$sails', '$q', '$log', '$http', 'Notification', 'PubSub',
     'AuthService',
     function(
-      $sails, $q, $log, $http, Notification, Upload, PubSub,
+      $sails, $q, $log, $http, Notification, PubSub,
       AuthService
     ) {
 
@@ -128,6 +128,7 @@ angular.module('app.core.data.service', [
               return $q.reject(response);
             });
       };
+
 
         self.getSettings = function() {
 
@@ -305,12 +306,108 @@ angular.module('app.core.data.service', [
       //      });
       //};
 
+        self.queryPosts = function(query) {
+
+
+            return $http({
+                url: '/api/posts',
+                method: "GET",
+                params: query
+            }).then(function(response) {
+
+                    return response;
+                }, function(response) {
+
+                    var errorTitle = 'Unable to retrieve posts';
+
+                    showErrors(response, errorTitle);
+
+                    return $q.reject(response);
+                });
+        };
+
+        self.getPostByAlias = function(alias) {
+
+            return $http({
+                url: '/api/posts/alias/' + alias,
+                method: "GET",
+            }).then(function(response) {
+                return response;
+            }, function(response) {
+
+                var errorTitle = 'Unable to retrieve post';
+
+                showErrors(response, errorTitle);
+
+                return $q.reject(response);
+            });
+        };
+
+        self.getPostById = function(id) {
+
+            return $http({
+                url: '/api/posts/' + id,
+                method: "GET",
+            }).then(function(response) {
+
+                return response;
+            }, function(response) {
+
+                var errorTitle = 'Unable to retrieve post';
+
+                showErrors(response, errorTitle);
+
+                return $q.reject(response);
+            });
+        };
+
+        self.updatePost = function(post) {
+
+            var postId = post.id
+            delete post.id
+
+            return $http({
+                url: '/api/posts/' + postId,
+                method: "PATCH",
+                data : post
+            }).then(function(response) {
+                Notification.success('Post updated!');
+                return response;
+            }, function(response) {
+
+                var errorTitle = 'Unable to retrieve post';
+
+                showErrors(response, errorTitle);
+
+                return $q.reject(response);
+            });
+        };
+
+        self.queryBlogCategories = function(query) {
+
+
+            return $http({
+                url: '/api/blog/categories',
+                method: "GET",
+                params: query
+            }).then(function(response) {
+                return response;
+            }, function(response) {
+
+                var errorTitle = 'Unable to retrieve blog categories';
+
+                showErrors(response, errorTitle);
+
+                return $q.reject(response);
+            });
+        };
 
 
 
 
 
-      /**
+
+        /**
        * Retrieve & subscribe to all version & asset data.
        * @return {Promise} Resolved once data has been retrieved
        */

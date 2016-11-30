@@ -1,0 +1,31 @@
+.container.blog-post(style="margin-top:50px;margin-bottom:50px")
+  .row.blog-main-content
+    .col-md-3.blog-categories.hidden-xs
+      ul.list-group
+        li.list-group-item(data-ng-repeat="item in olderPosts")
+          a(ng-href="/blog/posts/{{item.alias}}")
+            img.img-responsive(ng-src='/posts/{{item.id}}/image')
+            h5 {{item.title}}
+
+    .col-md-9.blog-posts(style="margin-top:10px;")
+      .blog-img
+        img.img-responsive(ng-src='/posts/{{post.id}}/image')
+      .blog-typo
+        h2.blog-post-title {{post.title}}
+        h4.blog-post-meta
+          | Δημοσιεύθηκε
+          | &nbsp;
+          span(am-time-ago="post.createdAt | amParse:'YYYY.MM.DD HH:mm:ss'")
+          | &nbsp;
+          | &middot;
+          | {{post.category.title}}
+        .blog-post-body(ng-bind-html="post.body")
+
+
+
+
+
+
+
+
+

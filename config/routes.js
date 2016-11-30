@@ -27,12 +27,16 @@ module.exports.routes = {
   //},
 
   'GET /': 'AppController.home',
+  'GET /blog': 'AppController.home',
+  'GET /blog/posts/:alias': 'AppController.home',
   //'GET /admin': 'AppController.home',
   'GET /admin': { view: 'admin' },
   'GET /admin/profile': { view: 'admin' },
   'GET /admin/services': { view: 'admin' },
   'GET /admin/settings': { view: 'admin' },
   'GET /admin/promotions': { view: 'admin' },
+  'GET /admin/blog': { view: 'admin' },
+  'GET /admin/blog/*': { view: 'admin' },
   'GET /admin/newsletter': { view: 'admin' },
   'GET /auth/login': 'AppController.home',
   'GET /auth/logout': 'AppController.home',
@@ -75,5 +79,30 @@ module.exports.routes = {
    */
   'GET /api/profile': 'HomePageController.getProfile',
   'POST /api/profile': 'HomePageController.upsertProfile',
+
+
+  /**
+   * BLOG CATEGORIES
+   */
+
+  'POST /api/blog/categories': 'BlogCategoriesController.create',
+  'GET /api/blog/categories': 'BlogCategoriesController.query',
+  'GET /api/blog/categories/:id': 'BlogCategoriesController.getById',
+  'PATCH /api/blog/categories/:id': 'BlogCategoriesController.update',
+  'DELETE /api/blog/categories/:id': 'BlogCategoriesController.delete',
+
+  /**
+   * BLOG POSTS
+   */
+
+  'POST /api/posts': 'BlogPostsController.create',
+  'GET /api/posts': 'BlogPostsController.query',
+  'GET /api/posts/:id': 'BlogPostsController.getById',
+  'GET /posts/:id/image': 'BlogPostsController.image',
+  'GET /api/posts/alias/:alias': 'BlogPostsController.getByAlias',
+  'PATCH /api/posts/:id': 'BlogPostsController.update',
+  'DELETE /api/posts/:id': 'BlogPostsController.delete',
+
+
 
 };

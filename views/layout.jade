@@ -22,7 +22,7 @@ html
         div.double-bounce1
         div.double-bounce2
     .header(ng-cloak).init-hidden
-      .navbar.navbar-default.navbar-fixed-top(role='navigation',ng-show="$location.$$path == '/'")
+      .navbar.navbar-default.navbar-fixed-top(role='navigation',ng-show="$location.$$path == '/' || $location.$$path.indexOf('blog') > -1",ng-controller='NavController')
         .container-fluid
           .navbar-header
             button.navbar-toggle.collapsed(ng-init="navCollapsed = true",ng-click="navCollapsed = !navCollapsed")
@@ -42,7 +42,7 @@ html
               li
                 a(href="#",ng-click="scrollTo('promotions')",ng-class="{'active':activeSection == 'promotions'}") ΠΡΟΣΦΟΡΕΣ
               li
-                a(href="#",ng-click="scrollTo('blog')",ng-class="{'active':activeSection == 'blog'}") BLOG
+                a(href="/blog",ng-class="{'active':activeSection == 'blog' || $location.$$path.indexOf('blog') > -1}") BLOG
               li
                 a(href="#",ng-click="scrollTo('newsletter')",ng-class="{'active':activeSection == 'newsletter'}") ΕΠΙΚΟΙΝΩΝΙΑ
               li(ng-if="isAuthenticated()")
@@ -83,13 +83,13 @@ html
                 a(href="/")
                   i.fa.fa-power-off
                   | &nbsp;&nbsp;LOGOUT
-    .container-fluid(ng-cloak).init-hidden
-      div(ng-view='')
-      .row.footer.clearfix(ng-show="$location.$$path == '/'")
+    .container-fluid(ng-cloak).init-hidden.main-wrapper
+      div.main-view(ng-view='')
+      .row.footer.clearfix(ng-show="$location.$$path == '/' || $location.$$path.indexOf('blog') > -1",ng-class="{'footer-auto':isNarrow()}")
         .container
           .row
             .col-md-3
-              h5 KOUTRO_CLEAN
+              h5 BCGS
               p.text-sm Lorem ipsum dolor sit lamer papoua nea guinea. Lorem ipsum dolor sit lamer papoua nea guinea. Lorem ipsum dolor sit lamer papoua nea guinea
             .col-md-3
             .col-md-3.links
@@ -97,23 +97,23 @@ html
                 .col-md-6
                   a(href="#",ng-click="scrollTo('about')") ΠΡΟΦΙΛ
                 .col-md-6
-                  a(href="#",ng-click="scrollTo('about')") ΠΡΟΣΦΟΡΕΣ
+                  a(href="#",ng-click="scrollTo('promotions')") ΠΡΟΣΦΟΡΕΣ
               .row
                 .col-md-6
-                  a(href="#",ng-click="scrollTo('about')") ΥΠΗΡΕΣΙΕΣ
+                  a(href="#",ng-click="scrollTo('services')") ΥΠΗΡΕΣΙΕΣ
                 .col-md-6
-                  a(href="#",ng-click="scrollTo('about')") BLOG
+                  a(href="#",ng-click="scrollTo('block')") BLOG
               br
             .col-md-3.contact
               p
                 i.fa.fa-mobile
-                | &nbsp;&nbsp;+210 777 55 66
+                | &nbsp;&nbsp;{{settings.phone}}
               p
                 i.fa.fa-envelope
-                | &nbsp;&nbsp;info@koutroclean.gr
+                | &nbsp;&nbsp; {{settings.email}}
               p
                 i.fa.fa-map-marker
-                | &nbsp;&nbsp;Κάπου 37, Νέο Ψυχικό, Αθήνα
+                | &nbsp;&nbsp; {{settings.address}}
           .footer-b
             .col-xs-6.col
               p.text-sm
@@ -143,8 +143,9 @@ html
     script(src='/bower_components/sails.io.js/dist/sails.io.js')
     script(src='/bower_components/angular-sails/dist/angular-sails.js')
     script(src='/bower_components/moment/moment.js')
-    script(src='/bower_components/angular-moment/angular-moment.js')
     script(src='/bower_components/ng-file-upload/ng-file-upload.js')
+    script(src='/bower_components/moment/locale/el.js')
+    script(src='/bower_components/angular-moment/angular-moment.js')
     script(src='/bower_components/angular-PubSub/src/angular-pubsub.js')
     script(src='/bower_components/angular-scroll/angular-scroll.js')
     script(src='/bower_components/angular-simple-logger/dist/angular-simple-logger.js')
@@ -155,6 +156,7 @@ html
 
     // SCRIPTS
     script(src="/js/main.js")
+    script(src="/js/admin-blog/admin.blog.js")
     script(src="/js/admin-profile/admin.profile.js")
     script(src="/js/admin-promotions/admin.promotions.js")
     script(src="/js/admin-promotions/create/create-promotions-modal.js")
@@ -162,6 +164,8 @@ html
     script(src="/js/admin-services/create/create-service-modal.js")
     script(src="/js/admin-settings/admin.settings.js")
     script(src="/js/admin/admin.js")
+    script(src="/js/blog-post/blog-post-controller.js")
+    script(src="/js/blog/blog-controller.js")
     script(src="/js/core/auth/auth-service.js")
     script(src="/js/core/auth/auth.js")
     script(src="/js/core/auth/login/login-controller.js")

@@ -7,6 +7,7 @@
 var AppController = {
 
     home : function(req, res) {
+
         res.view('layout');
 
     }

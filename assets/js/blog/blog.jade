@@ -1,0 +1,60 @@
+.container.blog
+  .row
+    .col-md-12.blog-page-header.text-center
+      h1
+        small
+        | Το Blog μας
+      //.loader(ng-if="loadingPosts")
+      //  span .
+      //  span .
+      //  span .
+      div.underliner
+  //.row
+  //  .col-md-12.text-center
+  //    p
+  //      | Κατηγορία:&nbsp;
+  //      strong {{selectedCategory ? selectedCategory.title : 'Όλες' }}
+  //      | ,&nbsp;
+  //      | Σελίδα:&nbsp;
+  //      strong {{pagination.currentPage}}
+  .row.blog-main-content
+    .col-md-3.blog-categories
+
+      ul.list-group
+        li.list-group-item.list-group-item-header
+          h3 Κατηγορίες
+        li.list-group-item(data-ng-repeat="cat in categories")
+          .checkbox.no-margin
+            label
+              input(type="checkbox",ng-change="onCategorySelected(cat)",ng-model="cat.isChecked")
+              .cbl
+                span.check
+                span.box
+                | {{cat.title}}
+
+    .col-md-9.blog-posts
+      .col-md-12.blog-posts-container
+        .blog-post(ng-repeat="post in posts")
+          .row
+            .col-md-12
+              .blog-img
+                img.img-responsive(src="/images/demo-image.jpg")
+              .blog-typo
+                h2.blog-post-title {{post.title}}
+                h4.blog-post-meta
+                  | Δημοσιεύθηκε
+                  | &nbsp;
+                  span(am-time-ago="post.createdAt | amParse:'YYYY.MM.DD HH:mm:ss'")
+                  | &nbsp;
+                  | &middot;
+                  | {{post.category.title}}
+                p.blog-post-excerpt(ng-bind-html="post.excerpt")
+                a(ng-href="/blog/posts/{{post.alias}}").btn.btn-green-inverted ΔΕΙΤΕ ΠΕΡΙΣΣΟΤΕΡΑ
+      .col-md-12.pagi
+        ul(uib-pagination, total-items="pagination.totalCount", ng-model="pagination.currentPage", max-size="8",boundary-links="true", force-ellipses="true",ng-change="pageChanged()")
+
+
+
+
+
+

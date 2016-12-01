@@ -38,13 +38,13 @@
           .row
             .col-md-12
               .blog-img
-                img.img-responsive(src="/images/demo-image.jpg")
+                img.img-responsive(ng-src='/posts/{{post.id}}/image')
               .blog-typo
                 h2.blog-post-title {{post.title}}
                 h4.blog-post-meta
                   | Δημοσιεύθηκε
                   | &nbsp;
-                  span(am-time-ago="post.createdAt | amParse:'YYYY.MM.DD HH:mm:ss'")
+                  span(am-time-ago="post.createdAt")
                   | &nbsp;
                   | &middot;
                   | {{post.category.title}}

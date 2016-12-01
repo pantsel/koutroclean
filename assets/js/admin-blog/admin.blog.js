@@ -15,6 +15,13 @@ angular.module('app.admin.blog',[
                 data: {
                     private: true
                 }
+            })
+            .when('/admin/blog/create', {
+                templateUrl: 'js/admin-blog/admin-blog-create.html',
+                controller : 'AdminBlogCreateController',
+                data: {
+                    private: true
+                }
             });
     }])
     .controller('AdminBlogController', [
@@ -37,6 +44,29 @@ angular.module('app.admin.blog',[
             $scope.onCategorySelected = function(cat) {
                 makeCategoriesMap()
                 queryPosts()
+            }
+
+            $scope.togglePublished = function(post) {
+                post.published = !post.published
+                DataService.updatePost(post)
+                    .then(function(resp){
+                        post = resp.data[0]
+
+                    })
+            }
+
+            $scope.deleteChecked = function() {
+                var toDelete = []
+                $scope.posts.forEach(function(post){
+                    if(post.isChecked) toDelete.push(post)
+                })
+
+                toDelete.forEach(function(item){
+                    DataService.deletePost(item)
+                        .then(function(success){
+                            $scope.posts.splice($scope.posts.indexOf(item),1);
+                        })
+                })
             }
 
             $scope.onEditPost = function(post) {
@@ -123,6 +153,8 @@ angular.module('app.admin.blog',[
                     $scope.categories = resp.data
                 })
 
+
+
             $scope.tinymceOptions = {
                 setup: function(editor) {
                     editor.on("init", function() {
@@ -201,5 +233,91 @@ angular.module('app.admin.blog',[
 
 
         }
-    ]);
+    ])
+    .controller('AdminBlogCreateController',
+        ['$scope','DataService','$uibModal','$log','AuthService','$timeout',
+            '$document','$routeParams','Upload','Notification','$location',
+            function($scope,DataService,$uibModal,$log,AuthService,$timeout,
+                     $document,$routeParams,Upload,Notification,$location) {
+
+
+                $scope.post = {}
+
+                DataService.queryBlogCategories()
+                    .then(function(resp){
+                        $scope.categories = resp.data
+                    })
+
+                $scope.tinymceOptions = {
+                    setup: function(editor) {
+                        editor.on("init", function() {
+                            //editor.execCommand("fontName", false, "Lato");
+                            //this.getDoc().body.style.fontFamily = 'Lato';
+                        });
+                        editor.on("click", function() {
+
+                        });
+                    },
+                    onChange: function(e) {
+                        // put logic here for keypress and cut/paste changes
+                    },
+                    inline: false,
+                    plugins : 'advlist autolink link image lists charmap print preview',
+                    skin: 'lightgray',
+                    theme : 'modern'
+                };
+
+                $scope.update = function() {
+                    $log.debug("Post",$scope.post)
+                    $scope.uploader.uploadItem(0)
+                }
+
+                $scope.update = function () {
+
+                    $log.debug("POST",$scope.post)
+                    if(!$scope.file) {
+                        Notification.error("Δεν έχει ορίστεί εικόνα. Η εικόνα είναι απαραίτητη.");
+                        return false;
+                    }
+                    $scope.file.upload = Upload.upload({
+                        url: '/api/posts',
+                        headers: {
+                            'optional-header': 'header-value'
+                        },
+                        data: {
+                            post: $scope.post,
+                            file: $scope.file
+                        }
+                    });
+
+                    $scope.file.upload.then(function (response) {
+                        $timeout(function () {
+
+                            Notification.success('Post created!');
+                            $location.path("/admin/blog")
+                        });
+                    }, function (response) {
+                        if (response.status > 0) {
+                            $scope.errorMsg = response.status + ': ' + response.data;
+                            Notification.error($scope.errorMsg);
+                        }
+
+                    }, function (evt) {
+                        // Math.min is to fix IE which reports 200% sometimes
+                        $scope.file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                    });
+
+                    $scope.file.upload.xhr(function (xhr) {
+                        // xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
+                    });
+
+
+                };
+
+
+
+
+
+            }
+        ]);
 

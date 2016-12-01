@@ -3,13 +3,21 @@ var slugify = require('slugify')
 module.exports = {
     attributes: {
         title : 'string',
-        alias : 'string',
+        alias : {
+            type : 'string',
+            unique : true
+        },
         excerpt : 'string',
         imageFd : 'string',
         body : 'string',
-        fd : 'string',
-        filename : 'string',
-        fileUrl : 'string',
+        fd : {
+            type : 'string',
+            required : true
+        },
+        filename : {
+            type : 'string',
+            required : true
+        },
         category : {
             model: 'blogcategory',
             required: true

@@ -26,9 +26,9 @@
                             option(value="published") Δημοσιευμένα
                             option(value="unpublished") Αδημοσίευτα
                     | &nbsp;
-                    button.btn.btn-primary Νέο άρθρο
+                    a.btn.btn-primary(ng-href="/admin/blog/create") Νέο άρθρο
                     | &nbsp;
-                    button.btn.btn-danger Διαγ. επιλεγμένων
+                    button.btn.btn-danger(ng-click="deleteChecked()") Διαγ. επιλεγμένων
             .col-md-12
                 table.table.table-bordered.table-striped
                     tr(style="background-color:#eaeaea")
@@ -49,7 +49,7 @@
                         td
                             .checkbox.no-margin
                                 label
-                                    input(type="checkbox",ng-change="onPostSelected(post)",ng-model="cat.isChecked")
+                                    input(type="checkbox",ng-model="post.isChecked")
                                     .cbl
                                         span.check
                                         span.box
@@ -64,7 +64,7 @@
                                 i.fa.fa-edit
                                 | &nbsp;Επεξεργασία
                         td
-                            button.btn.btn-sm(ng-class="{'btn-success':post.published,'btn-danger':!post.published}")
+                            button.btn.btn-sm(ng-click="togglePublished(post)",ng-class="{'btn-success':post.published,'btn-danger':!post.published}")
                                 i.fa.fa-circle-o
             .col-md-12.pagi
                 ul(uib-pagination, total-items="pagination.totalCount", ng-model="pagination.currentPage", max-size="8",boundary-links="true", force-ellipses="true",ng-change="pageChanged()")

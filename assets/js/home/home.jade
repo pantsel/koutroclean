@@ -94,9 +94,9 @@ br
       .col-md-4.blog-post(ng-repeat="post in posts",ng-if="$index < 2")
         .blog-post-inner
           .category-tag {{post.category.title}}
-          img.img-responsive(src="/images/buildings.jpg")
+          img.img-responsive(ng-src='/posts/{{post.id}}/image')
           h4 {{post.title}}
-          p.blog-content {{ post.excerpt | limitTo:150 }}
+          p.blog-content(ng-bind-html="post.excerpt | limitTo:150")
           p
             a(ng-href="/blog/posts/{{post.alias}}").btn.btn-green.btn-sm Περισσότερα...
       .col-md-4
@@ -127,14 +127,14 @@ br
       h3 Επικοινωνία
       address.bg-light-grey
         i.fa.fa-map-marker
-        | &nbsp;&nbsp;&nbsp;Κάπου 37, Νέο Ψυχικό, Αθήνα
+        | &nbsp;&nbsp;&nbsp;{{settings.address}}
         br
         i.fa.fa-phone
-        | &nbsp;&nbsp;&nbsp;+210 777 55 66
+        | &nbsp;&nbsp;&nbsp;{{settings.phone}}
         br
         i.fa.fa-envelope
         | &nbsp;&nbsp;&nbsp;
-        a(href="mailto:info@koutroclean") info@koutroclean.gr
+        a(href="mailto:{{settings.email}}") {{settings.email}}
       p Θα θέλατε να συνεργαστούμε; Ζητήστε τη δική σας εξατομικευμένη προσφορά. Θα χαρούμε να σας εξυπηρετήσουμε.
 
       form.contact-form

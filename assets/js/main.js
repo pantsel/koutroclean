@@ -8,6 +8,17 @@ angular.module('app', [
     'ui.router',
     'ui.tinymce'
   ])
+    .directive('errSrc', function() {
+      return {
+        link: function(scope, element, attrs) {
+          element.bind('error', function() {
+            if (attrs.src != attrs.errSrc) {
+              attrs.$set('src', attrs.errSrc);
+            }
+          });
+        }
+      }
+    })
   .filter('unsafe', function($sce) {
     return function(val) {
       return $sce.trustAsHtml(val);

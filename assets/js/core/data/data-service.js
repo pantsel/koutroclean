@@ -3,10 +3,10 @@ angular.module('app.core.data.service', [
   ])
   .service('DataService', [
     '$sails', '$q', '$log', '$http', 'Notification', 'PubSub',
-    'AuthService',
+    'AuthService','$location',
     function(
       $sails, $q, $log, $http, Notification, PubSub,
-      AuthService
+      AuthService,$location
     ) {
 
 
@@ -326,6 +326,25 @@ angular.module('app.core.data.service', [
                 });
         };
 
+        self.deletePost = function(post) {
+
+
+            return $http({
+                url: '/api/posts/' + post.id,
+                method: "DELETE",
+            }).then(function(response) {
+                Notification.success("Post deleted!")
+                return response;
+            }, function(response) {
+
+                var errorTitle = 'Unable to delete posts';
+
+                showErrors(response, errorTitle);
+
+                return $q.reject(response);
+            });
+        };
+
         self.getPostByAlias = function(alias) {
 
             return $http({
@@ -333,11 +352,15 @@ angular.module('app.core.data.service', [
                 method: "GET",
             }).then(function(response) {
                 return response;
-            }, function(response) {
+            }).catch(function(response) {
 
                 var errorTitle = 'Unable to retrieve post';
 
+                console.error("sdvsvsvsdvsdvsdvdsv",response)
                 showErrors(response, errorTitle);
+
+                $location.path("/" + response.status)
+
 
                 return $q.reject(response);
             });
@@ -365,6 +388,8 @@ angular.module('app.core.data.service', [
 
             var postId = post.id
             delete post.id
+
+            if(post.category.id) post.category = post.category.id
 
             return $http({
                 url: '/api/posts/' + postId,

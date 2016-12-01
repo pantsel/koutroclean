@@ -55,23 +55,20 @@ var BlogPostsController = {
             published : true
         }).populate(["category"]).exec(function(err,post){
             if(err) return res.negotiate(err)
+            if(!post) return res.notFound()
             return res.json(post)
         })
     },
 
     delete : function(req,res) {
+        BlogPost.destroy(req.params.id).exec(function(err,deleted){
+            if(err) return res.negotiate(err)
 
+            return res.ok()
+        })
     },
 
-    create : function(req,res) {
-        BlogPost.create(req.body).exec(function (err, records) {
-            if (err) {
-                return res.negotiate(err);
-            }
 
-            return res.json(records[0])
-        });
-    },
 
     image : function(req,res) {
         BlogPost.findOne(req.param('id')).exec(function (err, post){
@@ -138,6 +135,49 @@ var BlogPostsController = {
                 }
 
                 return res.json(updated)
+            });
+        });
+
+
+    },
+
+    create : function(req,res) {
+
+        req.file('file').upload({
+            // don't allow the total upload size to exceed ~10MB
+            maxBytes: 10000000
+        },function whenDone(err, uploadedFiles) {
+            if (err) {
+                return res.negotiate(err);
+            }
+
+            var post;
+
+            var parsed = qs.parse(req.body)
+            post = parsed.post
+
+            console.log("parsed",parsed)
+            console.log("post",post)
+
+            if(!post) return res.badRequest("Δεν έχετε συμπληρώσει όλα τα απαραίτητα πεδία!")
+
+
+
+            // If no files were uploaded, respond with an error.
+            if (uploadedFiles.length > 0){
+                post.fd = uploadedFiles[0].fd
+                post.filename =  uploadedFiles[0].filename
+            }else{
+                return res.badRequest("Η εικόνα είναι απαραίτητη!")
+            }
+
+            BlogPost.create(post).exec(function afterwards(err, created){
+
+                if (err) {
+                    return res.negotiate(err);
+                }
+
+                return res.json(created)
             });
         });
 

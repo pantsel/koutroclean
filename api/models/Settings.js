@@ -4,6 +4,8 @@ module.exports = {
         social : 'object',
         address : 'string',
         phone : 'string',
+        addressLat : 'float',
+        addressLon : 'float',
         email : 'string',
         version : {
             type: 'string'

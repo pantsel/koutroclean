@@ -61,18 +61,21 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
 
 
 
-        $scope.map = { center: { latitude: 38.000199, longitude: 23.772889 }, zoom: 16 };
-        $scope.marker = {
-            id: 0,
-            coords: {
-                latitude: 38.000199,
-                longitude: 23.772889
-            },
-            options: {
-                draggable: false,
-                icon:'/images/map-marker.png'
-            }
-        };
+        if($scope.settings) {
+            $scope.map = { center: { latitude: $scope.settings.addressLat, longitude: $scope.settings.addressLon }, zoom: 16 };
+            $scope.marker = {
+                id: 0,
+                coords: {
+                    latitude: $scope.settings.addressLat,
+                    longitude: $scope.settings.addressLon
+                },
+                options: {
+                    draggable: false,
+                    icon:'/images/map-marker.png'
+                }
+            };
+        }
+
 
         $scope.newsletter = {
             email : ''

@@ -71,6 +71,30 @@
                                 ng-model='settings.address',
                                 name='address')
                         .form-group
+                            .col-md-5.no-padding(style="margin-right:32px")
+                                .input-group
+                                    span.input-group-addon Latitude
+                                    input.form-control.input-md(
+                                    ng-model='settings.addressLat',
+                                    name='addressLat')
+                            .col-md-5.no-padding
+                                .input-group
+                                    span.input-group-addon Longitude
+                                    input.form-control.input-md(
+                                    ng-model='settings.addressLon',
+                                    name='addressLon')
+
+                            //.col-md-6
+                            //    label Latidute
+                            //    input.form-control.input-md(
+                            //    ng-model='settings.addressLat',
+                            //    name='addressLat')
+                            //.col-md-6
+                            //    label Longitude
+                            //    input.form-control.input-md(
+                            //    ng-model='settings.addressLon',
+                            //    name='addressLon')
+                        .form-group
                             label.bg-grey.col-md-4.control-label(for='phone')
                                 i.fa.fa-phone
                                 | &nbsp;&nbsp;&nbsp;&nbsp;Τηλέφωνο

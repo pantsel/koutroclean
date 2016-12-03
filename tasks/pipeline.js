@@ -23,6 +23,33 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
 
+  '/bower_components/tinymce-dist/tinymce.js',
+  '/bower_components/angular/angular.js',
+  '/bower_components/angular-cookies/angular-cookies.js',
+  'bower_components/angular-ui-tinymce/src/tinymce.js',
+  '/bower_components/jquery/dist/jquery.js',
+  '/bower_components/angular-animate/angular-animate.js',
+  '/bower_components/angular-messages/angular-messages.js',
+  '/bower_components/angular-route/angular-route.js',
+  '/bower_components/angular-sanitize/angular-sanitize.js',
+  '/bower_components/lodash/lodash.js',
+  '/bower_components/angular-ui-notification/dist/angular-ui-notification.js',
+  '/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+  '/bower_components/angular-confirm-modal/angular-confirm.js',
+  '/bower_components/angular-jwt/dist/angular-jwt.js',
+  '/bower_components/ngstorage/ngStorage.js',
+  '/bower_components/sails.io.js/dist/sails.io.js',
+  '/bower_components/angular-sails/dist/angular-sails.js',
+  '/bower_components/moment/moment.js',
+  '/bower_components/ng-file-upload/ng-file-upload.js',
+  '/bower_components/moment/locale/el.js',
+  '/bower_components/angular-moment/angular-moment.js',
+  '/bower_components/angular-PubSub/src/angular-pubsub.js',
+  '/bower_components/angular-scroll/angular-scroll.js',
+  '/bower_components/angular-simple-logger/dist/angular-simple-logger.js',
+  '/bower_components/angular-google-maps/dist/angular-google-maps.js',
+  '/bower_components/angular-ui-router/release/angular-ui-router.js',
+
   'js/main.js',
 
   // All of the rest of your client-side js files

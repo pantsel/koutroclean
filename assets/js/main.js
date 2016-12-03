@@ -6,7 +6,8 @@ angular.module('app', [
     'app.blog.post',
     'duScroll',
     'ui.router',
-    'ui.tinymce'
+    'ui.tinymce',
+    'ngCookies'
   ])
     .directive('errSrc', function() {
       return {
@@ -81,10 +82,37 @@ angular.module('app', [
       });
     }
   ])
+    .provider('myCSRF',[function(){
+      var headerName = 'X-CSRF-Token';
+      var cookieName = '_csrf';
+      var allowedMethods = ['GET'];
+
+      this.setHeaderName = function(n) {
+        headerName = n;
+      }
+      this.setCookieName = function(n) {
+        cookieName = n;
+      }
+      this.setAllowedMethods = function(n) {
+        allowedMethods = n;
+      }
+      this.$get = [function(){
+        return {
+          'request': function(config) {
+            if(allowedMethods.indexOf(config.method) === -1) {
+              // do something on success
+              config.headers[headerName] = document.getElementsByName('_csrf')[0].content;
+            }
+            return config;
+          }
+        }
+      }];
+    }]).config(function($httpProvider) {
+    $httpProvider.interceptors.push('myCSRF');
+})
   .run(['$http',function($http) {
-    $http.defaults.headers.post['X-CSRF-Token']=document.getElementsByName('_csrf')[0].content;
-    }
-  ])
+
+  }])
   .controller('MainController', ['$scope', 'AuthService', '$location','DataService','$log',
     function($scope, AuthService, $location,DataService, $log) {
       $scope.isAuthenticated = AuthService.isAuthenticated;

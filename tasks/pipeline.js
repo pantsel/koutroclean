@@ -23,7 +23,6 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
 
-  '/bower_components/tinymce-dist/tinymce.js',
   '/bower_components/angular/angular.js',
   '/bower_components/angular-cookies/angular-cookies.js',
   'bower_components/angular-ui-tinymce/src/tinymce.js',
@@ -49,6 +48,7 @@ var jsFilesToInject = [
   '/bower_components/angular-simple-logger/dist/angular-simple-logger.js',
   '/bower_components/angular-google-maps/dist/angular-google-maps.js',
   '/bower_components/angular-ui-router/release/angular-ui-router.js',
+  '/bower_components/tinymce-dist/tinymce.js',
 
   'js/main.js',
 

@@ -33,7 +33,7 @@ module.exports = {
     host: process.env.IP || '127.0.0.1',
     environment: process.env.ENV || 'development',
 
-    hookTimeout: 30000, // 30 seconds
+    hookTimeout: 50000, // 50 seconds
 
     //
     // The full base url at which your site will be primarily available.

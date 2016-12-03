@@ -141,12 +141,14 @@ angular.module('app', [
 
         $scope.socials = []
 
-        Object.keys($scope.settings.social).forEach(function(key){
-          $scope.socials.push({
-            icon : key,
-            link : ( $scope.settings.social[key].indexOf("http://") < 0 || $scope.settings.social[key].indexOf("https://") < 0 )? "http://" + $scope.settings.social[key] : $scope.settings.social[key]
-          })
-        })
+          if($scope.settings.social) {
+              Object.keys($scope.settings.social).forEach(function(key){
+                  $scope.socials.push({
+                      icon : key,
+                      link : ( $scope.settings.social[key].indexOf("http://") < 0 || $scope.settings.social[key].indexOf("https://") < 0 )? "http://" + $scope.settings.social[key] : $scope.settings.social[key]
+                  })
+              })
+          }
       })
 
 

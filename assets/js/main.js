@@ -122,6 +122,19 @@ angular.module('app', [
       })
 
 
+      DataService.queryPosts({
+        page : 1,
+        perPage : 4
+      }).then(function(success){
+
+        console.log("Retrieved posts!",success)
+        $scope.posts = success.data.posts
+        $scope.pagination = success.data.meta.paginate
+      }).catch(function(error){
+
+      })
+
+
       
 
 

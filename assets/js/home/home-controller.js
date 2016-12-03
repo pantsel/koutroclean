@@ -6,8 +6,8 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
         controller: 'HomeController as vm',
       });
   }])
-  .controller('HomeController', ['$scope','InitializationService','DataService','$uibModal','$log',
-    function($scope,InitializationService,DataService,$uibModal,$log) {
+  .controller('HomeController', ['$scope','InitializationService','DataService','$uibModal','$log','Notification',
+    function($scope,InitializationService,DataService,$uibModal,$log,Notification) {
 
         $('<img/>').attr('src', '../images/bg_grass.jpg').on('load',function() {
             $(this).remove();
@@ -59,17 +59,7 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
             });
         })
 
-        DataService.queryPosts({
-            page : 1,
-            perPage : 4
-        }).then(function(success){
 
-            console.log("Retrieved posts!",success)
-            $scope.posts = success.data.posts
-            $scope.pagination = success.data.meta.paginate
-        }).catch(function(error){
-
-        })
 
         $scope.map = { center: { latitude: 38.000199, longitude: 23.772889 }, zoom: 16 };
         $scope.marker = {
@@ -90,7 +80,6 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
 
         $scope.saveEmail = function() {
             DataService.saveEmail($scope.newsletter.email).then(function(success){
-
                 $scope.newsletter.email = ''
             },function(err){
 
@@ -127,19 +116,41 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
                 controller: function($uibModalInstance,promotion){
                     var $ctrl = this
                     $ctrl.promotion = promotion
+                    $ctrl.contact = {
+                        name : '',
+                        phone: '',
+                        hours: 'morning'
+                    }
+
                     $ctrl.ok = function () {
-                        $uibModalInstance.close();
+
+
+
+                        if(!$ctrl.contact.name || !$ctrl.contact.phone) {
+                            Notification.error("Δεν έχετε συμπληρώσει τα απαραίτητα πεδία.")
+                            return false;
+                        }
+
+                        $ctrl.submitting = true;
+
+                        DataService.submitOfferInterest({
+                            promotion : $ctrl.promotion,
+                            contact : $ctrl.contact
+                        }).then(function(success){
+                            $ctrl.submitting = false;
+                            $uibModalInstance.close();
+                        }).catch(function(err){
+                            $ctrl.submitting = false;
+                        })
+
+
                     };
 
                     $ctrl.cancel = function () {
                         $uibModalInstance.dismiss('cancel');
                     };
 
-                    $ctrl.contact = {
-                        name : '',
-                        phone: '',
-                        hours: 'morning'
-                    }
+
                 },
                 controllerAs: '$ctrl',
                 size: 'md',
@@ -152,6 +163,36 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
         }
 
 
+        $scope.contact = {}
+        $scope.zipRegex = /(?!.*)/;
+        $scope.submitContactForm = function(isValid) {
+
+            if($scope.submittingContact || !isValid) return false;
+
+            $scope.contactErrors = []
+            if(!$scope.contact.name) {
+                $scope.contactErrors.push('name')
+            }
+            if(!$scope.contact.email) {
+                $scope.contactErrors.push('email')
+            }
+            if(!$scope.contact.text) {
+                $scope.contactErrors.push('text')
+            }
+
+            if($scope.contactErrors.length) return false;
+
+            $scope.submittingContact = true
+
+            DataService.submitContactForm($scope.contact)
+                .then(function(success){
+                    $scope.contact = {}
+                    $scope.contactErrors = []
+                    $scope.submittingContact = false
+                },function(err){
+                    $scope.submittingContact = false
+                })
+        }
 
 
 

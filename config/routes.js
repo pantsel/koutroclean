@@ -105,4 +105,10 @@ module.exports.routes = {
 
 
 
+  'POST /api/contact': 'ContactController.contact',
+  'POST /api/offerInterest': 'ContactController.submitOfferInterest',
+
+
+
+
 };

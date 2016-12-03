@@ -83,7 +83,7 @@
 
 br
 br
-.row#blog.section-blog.section.bg-light-grey.flex.center-aligner
+.row#blog.section-blog.section.bg-light-grey.flex.center-aligner(ng-show="posts.length")
   .container.thin
     h1.title Το Blog μας
     .underliner
@@ -137,18 +137,24 @@ br
         a(href="mailto:{{settings.email}}") {{settings.email}}
       p Θα θέλατε να συνεργαστούμε; Ζητήστε τη δική σας εξατομικευμένη προσφορά. Θα χαρούμε να σας εξυπηρετήσουμε.
 
-      form.contact-form
+      form.contact-form(ng-submit="submitContactForm(contactForm.$valid)",name="contactForm")
+        span.hidden
+          label.hidden(for="zipcode") Your zipcode
+          input#zipcode.hidden(value="",data-ng-pattern="zipRegex",data-ng-model="contact.zipcode")
         .row
           .col-md-6
-            input.form-control(type="text",name="contactName",placeholder="Όνομα")
+            .form-group(ng-class="{'has-error' : contactErrors.indexOf('name') > -1}")
+              input.form-control(ng-model="contact.name",type="text",name="contactName",placeholder="Όνομα")
           .col-md-6
-            input.form-control(type="email",name="contactEmail",placeholder="Email")
+            .form-group(ng-class="{'has-error' : contactErrors.indexOf('email') > -1}")
+              input.form-control(ng-model="contact.email",type="email",name="contactEmail",placeholder="Email")
         .row
           .col-md-12
-            textarea.form-control(rows="5",placeholder="Κείμενο...")
+            .form-group(ng-class="{'has-error' : contactErrors.indexOf('text') > -1}")
+              textarea.form-control(ng-model="contact.text",rows="5",placeholder="Κείμενο...")
         .row
           .col-md-12
-            button.btn.btn-green.btn-block OK
+            button.btn.btn-green.btn-block(type="submit",ng-disabled="submittingContact") OK
 
       br
 

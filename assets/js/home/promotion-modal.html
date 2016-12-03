@@ -26,6 +26,9 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-green" type="button" ng-click="$ctrl.ok()">ΜΕ ΕΝΔΙΑΦΕΡΕΙ!</button>
+    <button class="btn btn-green" ng-disabled="$ctrl.submitting" type="button" ng-click="$ctrl.ok()">
+        <i class="fa fa-spinner fa-spin" ng-show="$ctrl.submitting"></i>
+        ΜΕ ΕΝΔΙΑΦΕΡΕΙ!
+    </button>
     <button class="btn btn-green-inverted" type="button" ng-click="$ctrl.cancel()">ΔΕ ΜΕ ΕΝΔΙΑΦΕΡΕΙ</button>
 </div>

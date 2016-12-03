@@ -83,4 +83,9 @@ module.exports.policies = {
     create : 'authToken',
     update : 'authToken'
   },
+
+  ContactController : {
+    contact : true,
+    submitOfferInterest : true
+  },
 };

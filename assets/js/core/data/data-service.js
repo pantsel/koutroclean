@@ -427,6 +427,42 @@ angular.module('app.core.data.service', [
             });
         };
 
+        self.submitContactForm = function(contact) {
+            return $http({
+                url: '/api/contact',
+                method: "POST",
+                data: contact
+            }).then(function(response) {
+                Notification.success('Η φόρμα υποβλήθηκε με επιτυχία. Θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατόν.');
+                return response;
+            }, function(response) {
+
+                var errorTitle = 'Παρουσιάστηκε πρόβλημα κατά την αποστολή της φόρμας';
+
+                showErrors(response, errorTitle);
+
+                return $q.reject(response);
+            });
+        }
+
+        self.submitOfferInterest = function(data) {
+            return $http({
+                url: '/api/offerInterest',
+                method: "POST",
+                data: data
+            }).then(function(response) {
+                Notification.success('Ευχαριστούμε για το ενδιαφέρον. Θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατόν.');
+                return response;
+            }, function(response) {
+
+                var errorTitle = 'Παρουσιάστηκε πρόβλημα κατά την αποστολή της φόρμας';
+
+                showErrors(response, errorTitle);
+
+                return $q.reject(response);
+            });
+        }
+
 
 
 

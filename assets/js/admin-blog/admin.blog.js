@@ -56,17 +56,29 @@ angular.module('app.admin.blog',[
             }
 
             $scope.deleteChecked = function() {
+
                 var toDelete = []
                 $scope.posts.forEach(function(post){
                     if(post.isChecked) toDelete.push(post)
                 })
 
-                toDelete.forEach(function(item){
-                    DataService.deletePost(item)
-                        .then(function(success){
-                            $scope.posts.splice($scope.posts.indexOf(item),1);
-                        })
-                })
+                if(!toDelete.length) {
+                    alert("Δεν έχετε επιλέξει αναρτήσεις για διαγραφή")
+                    return;
+                }
+
+                var r = confirm("Θέλετε σίγουρα να διαγράψετε τις επιλεγμένες αναρτήσεις;");
+                if (r == true) {
+
+
+                    toDelete.forEach(function(item){
+                        DataService.deletePost(item)
+                            .then(function(success){
+                                $scope.posts.splice($scope.posts.indexOf(item),1);
+                            })
+                    })
+                }
+
             }
 
             $scope.onEditPost = function(post) {

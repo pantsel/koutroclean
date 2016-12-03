@@ -41,7 +41,7 @@ html
                 a(href="#",ng-click="scrollTo('services')",ng-class="{'active':activeSection == 'services'}") ΥΠΗΡΕΣΙΕΣ
               li
                 a(href="#",ng-click="scrollTo('promotions')",ng-class="{'active':activeSection == 'promotions'}") ΠΡΟΣΦΟΡΕΣ
-              li
+              li(ng-show="posts.length")
                 a(href="/blog",ng-class="{'active':activeSection == 'blog' || $location.$$path.indexOf('blog') > -1}") BLOG
               li
                 a(href="#",ng-click="scrollTo('newsletter')",ng-class="{'active':activeSection == 'newsletter'}") ΕΠΙΚΟΙΝΩΝΙΑ

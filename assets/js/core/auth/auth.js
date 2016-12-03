@@ -17,6 +17,7 @@ angular.module('app.core.auth', [
       templateUrl: '/templates/auth-toolbar.html'
     };
   })
+
   .config(['$httpProvider', 'jwtInterceptorProvider',
     function($httpProvider, jwtInterceptorProvider) {
       // Please note we're annotating the function so that the $injector works when the file is minified

@@ -13,13 +13,14 @@ angular.module('app.admin.settings',[])
         function($log,$scope, AuthService, $location, $document, InitializationService, DataService) {
 
             DataService.getSettings().then(function(response){
-                $log.info('Retrieved Settings: ',response)
+                $log.debug('Retrieved Settings: ',response)
                 $scope.settings = response.data
             })
 
             $scope.saveSettings = function() {
                 DataService.upsertSettings($scope.settings).then(function(response){
-                    $scope.settings = response.data
+                    $log.debug('uPATED Settings: ',response)
+                    $scope.settings = response.data[0]
                 })
             }
 

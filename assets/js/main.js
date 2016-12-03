@@ -81,8 +81,8 @@ angular.module('app', [
       });
     }
   ])
-  .run([function() {
-
+  .run(['$http',function($http) {
+    $http.defaults.headers.post['X-CSRF-Token']=document.getElementsByName('_csrf')[0].content;
     }
   ])
   .controller('MainController', ['$scope', 'AuthService', '$location','DataService','$log',

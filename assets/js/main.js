@@ -74,7 +74,7 @@ angular.module('app', [
       });
 
       // Use the HTML5 History API
-      $locationProvider.html5Mode(true);
+      $locationProvider.html5Mode(true).hashPrefix('!');
 
       NotificationProvider.setOptions({
         positionX: 'left',
@@ -113,8 +113,8 @@ angular.module('app', [
   .run(['$http',function($http) {
 
   }])
-  .controller('MainController', ['$scope', 'AuthService', '$location','DataService','$log',
-    function($scope, AuthService, $location,DataService, $log) {
+  .controller('MainController', ['$scope', 'AuthService', '$location','DataService','$log','$http',
+    function($scope, AuthService, $location,DataService, $log, $http) {
       $scope.isAuthenticated = AuthService.isAuthenticated;
       $scope.$location = $location;
 
@@ -161,6 +161,21 @@ angular.module('app', [
       }).catch(function(error){
 
       })
+
+        $http({
+            url: '/api/current_offers',
+            method: "GET",
+            params : {
+                validFrom: new Date(),
+                validUntil: new Date()
+            }
+        }).then(function(response) {
+            $scope.currentOffer = response.data
+
+
+        }, function(response) {
+            $log.debug("$scope.currentOffer fetch error",response)
+        });
 
 
       

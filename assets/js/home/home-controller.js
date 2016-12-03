@@ -116,6 +116,7 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
                 controller: function($uibModalInstance,promotion){
                     var $ctrl = this
                     $ctrl.promotion = promotion
+
                     $ctrl.contact = {
                         name : '',
                         phone: '',

@@ -1,10 +1,58 @@
 .container.admin-promotions
     .row
         .col-md-12
+            br
+            br
+            ul.nav.nav-pills
+                li(ng-class="{'active' : activeIndex==0}")
+                    a(href="#",ng-click="activeIndex=0") ΤΡΕΧΟΥΣΑ ΠΡΟΣΦΟΡΑ
+                li(ng-class="{'active' : activeIndex==1}")
+                    a(href="#",ng-click="activeIndex=1") ΠΑΚΕΤΑ ΠΡΟΣΦΟΡΩΝ
+            br
+
+.container.admin-promotions(ng-controller="AdminCurrentOfferController")
+    .row(ng-show="activeIndex==0")
+        .col-md-12
+            h3
+                | ΤΡΕΧΟΥΣΑ ΠΡΟΣΦΟΡΑ &nbsp;
+                span.small(ng-class="{'text-success' : isRunning,'text-danger': !isRunning}") {{isRunning ? 'ενεργή' : 'ανενεργή'}}
+
+        .col-md-12(ng-show="activeIndex==0")
+            .form(name="currentOfferForm")
+                .form-group(ng-class="{'has-error' : invalidAttributes.indexOf('title') > -1}")
+                    label Τίτλος
+                    input.form-control(ng-model="currentOffer.title",ng-required="true")
+                .form-group(ng-class="{'has-error' : invalidAttributes.indexOf('tagline') > -1}")
+                    label Tagline
+                    input.form-control(ng-model="currentOffer.tagline")
+                .row.form-group
+                    .col-md-6
+                        label Ισχύει από
+                        .input-group(ng-class="{'has-error' : invalidAttributes.indexOf('validFrom') > -1}")
+                            input.form-control(uib-datepicker-popup="{{format}}",ng-model="currentOffer.validFrom",is-open="popup1.opened",datepicker-options="dateOptions",ng-required="true",close-text="Close")
+                            span.input-group-btn
+                                button.btn.btn-default(ng-click="open1()")
+                                    i.fa.fa-calendar
+                    .col-md-6
+                        label Ισχύει έως
+                        .input-group(ng-class="{'has-error' : invalidAttributes.indexOf('validUntil') > -1}")
+                            input.form-control(uib-datepicker-popup="{{format}}",ng-model="currentOffer.validUntil",is-open="popup2.opened",datepicker-options="dateOptions",ng-required="true",close-text="Close")
+                            span.input-group-btn
+                                button.btn.btn-default(ng-click="open2()")
+                                    i.fa.fa-calendar
+                .form-group(ng-class="{'has-error' : invalidAttributes.indexOf('text') > -1}")
+                    label Κείμενο
+                    textarea(ng-required="true",ui-tinymce="tinymceOptions",ng-model="currentOffer.text",rows="5")
+                .form-group
+                    button.btn.btn-success(type="submit",ng-click="submitCurrentOffer()") Αποθήκευση αλλαγών
+
+
+    .row(ng-show="activeIndex==1")
+        .col-md-12
             h3
                 | ΠΑΚΕΤΑ ΠΡΟΣΦΟΡΩΝ &nbsp;
                 i.fa.fa-spinner.fa-spin(ng-show="loadingData")
-    .row
+    .row(ng-show="activeIndex==1")
         .col-md-4.promotion-box(ng-repeat="promotion in promotions")
             .inner.panel.panel-default
                 .panel-heading

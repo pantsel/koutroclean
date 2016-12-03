@@ -2,9 +2,12 @@
     <!--<h3 class="modal-title" id="modal-title">Προσφορά: {{$ctrl.promotion.slot.toUpperCase()}}</h3>-->
 <!--</div>-->
 <div class="modal-body" id="modal-body">
-    <h3 class="green">Σας ενδιαφέρει η {{$ctrl.promotion.slot.toUpperCase()}} προσφορά;</h3>
+    <blockquote ng-show="$ctrl.promotion.text" ng-bind-html="$ctrl.promotion.text"></blockquote>
+    <h3 ng-show="!$ctrl.promotion.text" class="green">Σας ενδιαφέρει η {{$ctrl.promotion.slot.toUpperCase()}} προσφορά;</h3>
+
     <p>Συμπληρώστε το όνομα και το τηλέφωνό σας και θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατόν!</p>
     <br>
+
     <form>
         <div class="form-group">
             <label>Όνομα/Επώνυμο</label>
@@ -28,7 +31,7 @@
 <div class="modal-footer">
     <button class="btn btn-green" ng-disabled="$ctrl.submitting" type="button" ng-click="$ctrl.ok()">
         <i class="fa fa-spinner fa-spin" ng-show="$ctrl.submitting"></i>
-        ΜΕ ΕΝΔΙΑΦΕΡΕΙ!
+        ΥΠΟΒΟΛΗ
     </button>
-    <button class="btn btn-green-inverted" type="button" ng-click="$ctrl.cancel()">ΔΕ ΜΕ ΕΝΔΙΑΦΕΡΕΙ</button>
+    <button class="btn btn-green-inverted" type="button" ng-click="$ctrl.cancel()">ΑΚΥΡΟ</button>
 </div>

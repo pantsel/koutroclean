@@ -84,6 +84,11 @@ module.exports.policies = {
     update : 'authToken'
   },
 
+  CurrentOfferController : {
+    query : true,
+    createOrUpdate : 'authToken',
+  },
+
   ContactController : {
     contact : true,
     submitOfferInterest : true

@@ -40,23 +40,27 @@ var ContactController = {
             return hours;
         }
 
+        var html = '<p>Όνομα: ' + req.body.contact.name + '</p>' +
+            '<p>Τηλέφωνο επικοινωνίας: ' + req.body.contact.phone + '</p>' +
+            '<p>Προσφορά: ' + ( req.body.promotion.slot || req.body.promotion.title )+ '</p>' +
+            '<p>Επιθυμητές ώρες επικοινωνίας : ' + translateHours(req.body.contact.hours) + '</p>'
+
+        if(req.body.promotion.title) {
+            html += "<hr>"
+            html += req.body.promotion.text
+        }
+
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: '"BCGS Admin ?" <admin@BCGS.gr>', // sender address
             to: process.env.ADMIN_EMAILS, // list of receivers
             subject: 'Νέα υποβολή φόρμας ενδιαφέροντος από  BCGS.gr', // Subject line
-            html: '<p>Όνομα: ' + req.body.contact.name + '</p>' +
-            '<p>Τηλέφωνο επικοινωνίας: ' + req.body.contact.phone + '</p>' +
-            '<p>Προσφορά: ' + req.body.promotion.slot + '</p>' +
-            '<p>Επιθυμητές ώρες επικοινωνίας : ' + translateHours(req.body.contact.hours) + '</p>'
+            html: html
         };
 
         // send mail with defined transport object
         transporter.sendMail(mailOptions, function(error, info){
-            if(error){
-                return res.negotiate(error);
-            }
-            console.log('Message sent: ' + info.response);
+            if(error) return res.negotiate(error);
             return res.ok()
         });
 

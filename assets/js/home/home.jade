@@ -4,7 +4,7 @@
   .actions.clearfix
     a.btn.btn-white(ng-controller="NavController",href="#",ng-click="scrollTo('about')",ng-class="{'btn-block':isNarrow()}")
       | ΔΕΙΤΕ ΠΕΡΙΣΣΟΤΕΡΑ
-    a.btn.btn-white(href="#",ng-class="{'btn-block':isNarrow()}")
+    a.btn.btn-white(ng-show="currentOffer",href="#",ng-class="{'btn-block':isNarrow()}",ng-controller="NavController",ng-click="scrollTo('current-offer')")
       | ΤΡΕΧΟΥΣΑ ΠΡΟΣΦΟΡΑ
   .building.clearfix(ng-show="!isShort()")
     img(src="/images/ktirio_sketch.png",ng-class="{'img-building-narrow':isNarrow()}")
@@ -51,6 +51,36 @@
       .col-md-6.services-pic.text-right.visible-lg.visible-md
         img.img-responsive(src="/images/services_pic.jpg")
 .clearfix
+.row#current-offer.section-promotions.section(ng-show="currentOffer")
+  .container-fluid
+    h1.title Τρέχουσα προσφορά
+    .underliner
+    p Περιορισμένου χρόνου
+    br
+    br
+    .row.section.bg-green(ng-class="{'flex':!isNarrow()}")
+      .desktop-content
+        table.inner
+          tr
+            td.half.bg-green.col-md-6.col-xs-12
+              .offer-container
+                h3.title {{currentOffer.title}}
+                .cnt
+                  div(ng-bind-html="currentOffer.text")
+                br
+                p
+                  | * H προσφορά ισχύει έως &nbsp;
+                  span {{currentOffer.validUntil | amUtc | amDateFormat:'DD MMMM'}}
+                .action
+                  button.btn.btn-white(ng-click="openPromotionModal(currentOffer)") ΜΕ ΕΝΔΙΑΦΕΡΕΙ
+            td.half.col-md-6.hidden-xs
+              .tag
+                .tag-cnt
+                  | {{currentOffer.tagline}}
+
+
+br
+br
 .row#promotions.section-promotions.section
   .container(style="max-width:980px")
     h1.title Τα πακέτα μας
@@ -77,9 +107,6 @@
                 | &nbsp;&nbsp; {{promotion.details[$index].content}}
             p
               button.btn(ng-click="openPromotionModal(promotion)",ng-class="{'btn-green-inverted': promotion.slot != 'standard','btn-white': promotion.slot == 'standard'}") ΜΕ ΕΝΔΙΑΦΕΡΕΙ
-
-
-
 
 br
 br

@@ -1158,7 +1158,78 @@ th {
 
 
 
+#current-offer {
+  .desktop-content{
+    position: relative;
+    max-height:500px;
+    overflow: hidden;
 
+    .inner {
+      background-image: url("../images/green_building.png");
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      //position: absolute;
+      //top:0;
+      width: 100%;
+
+      .half{
+        //width: 50%;
+
+        &:first-child{
+          padding: 50px 25px;
+          border-right: 5px solid $dark-green;
+        }
+
+        &:last-child {
+          vertical-align: top;
+        }
+
+        .offer-container{
+          padding: 1.5em;
+          //align-self: flex-end;
+          float: right;
+          max-width: 400px;
+          text-align: left;
+          border: 2px dashed #fff;
+
+          .title {
+            margin: 0;
+            color: #fff;
+            margin-bottom: 1em;
+          }
+
+          .action{
+            margin-top: 2em;
+          }
+        }
+
+        .tag{
+          font-size: 18px;
+          margin-top: 15px;
+          background: rgba(0,0,0,0.6);
+          padding: 10px;
+          float: left;
+        }
+      }
+    }
+  }
+}
+
+.text-success {
+  color : $brand-success !important;
+}
+
+.text-danger {
+  color : $brand-danger !important;
+}
+
+.nav-tabs > li > a, .nav-pills > li > a {
+  color : #999;
+  background-color: $gray-lighter;
+  margin-right: 10px;
+}
 
 
 

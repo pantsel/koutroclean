@@ -109,6 +109,10 @@ module.exports.routes = {
   'POST /api/offerInterest': 'ContactController.submitOfferInterest',
 
 
+  'GET /api/current_offers': 'CurrentOfferController.query',
+  'POST /api/current_offers': 'CurrentOfferController.createOrUpdate',
+
+
 
 
 };

@@ -1,5 +1,6 @@
 angular.module('app.admin',[
     'ngFileUpload',
+    'ui.bootstrap.tabs',
     'app.admin.profile',
     'app.admin.settings',
     'app.admin.services',

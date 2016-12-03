@@ -168,6 +168,7 @@ angular.module('app', [
             params : {
                 validFrom: new Date(),
                 validUntil: new Date()
+
             }
         }).then(function(response) {
             $scope.currentOffer = response.data

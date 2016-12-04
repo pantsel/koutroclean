@@ -73,7 +73,23 @@ angular.module('app', [
       $routeProvider
           .when('/404', {
             templateUrl: 'js/errors/404.html',
-            controller: function(){
+            controller: function(InitializationService){
+
+                $('<img/>').attr('src', '../images/bg_grass.jpg').on('load',function() {
+                    $(this).remove();
+
+
+                    $('.init-hidden').css('display','block')
+                    $(".initialization-spinner-wrapper").hide()
+
+                    try{
+                        reveal()
+                    }catch(err){}
+
+
+
+
+                });
 
             }
           })

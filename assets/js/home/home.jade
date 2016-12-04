@@ -4,7 +4,7 @@
   .actions.clearfix
     a.btn.btn-white(ng-controller="NavController",href="#",ng-click="scrollTo('about')",ng-class="{'btn-block':isNarrow()}")
       | ΔΕΙΤΕ ΠΕΡΙΣΣΟΤΕΡΑ
-    a.btn.btn-white(ng-show="currentOffer",href="#",ng-class="{'btn-block':isNarrow()}",ng-controller="NavController",ng-click="scrollTo('current-offer')")
+    a.btn.btn-white(ng-show="currentOffer",href="#",ng-class="{'btn-block':isNarrow()}",ng-click="openCurrentOfferModal(currentOffer)")
       | ΤΡΕΧΟΥΣΑ ΠΡΟΣΦΟΡΑ
   .building.clearfix(ng-show="!isShort()")
     img(src="/images/ktirio_sketch.png",ng-class="{'img-building-narrow':isNarrow()}")
@@ -39,26 +39,28 @@
           //p.text.text-sm Εδώ μπαίνει κείμενο που περιγράφει συνοπτικά τις υπηρεσίες που αντιστοιχουν σε αυτην την κατηγορία
           p.arrow-up(ng-class="{'arrow-transparent' : activeService.id !== service.id}")
 .row.service-details.section
-    .container
+    .patch
+    .container.no-padding
       .col-md-6.text-left.cntnt
-        h2.title.text-light
-          strong {{activeService.title}}
-        h4.sub-head.text-light {{activeService.description}}
-        ul.mlist
-          li.text-light(data-ng-repeat="item in activeService.details")
-            span {{item.content}}
-        br
+        .in
+          h2.title.text-light
+            strong {{activeService.title}}
+          h4.sub-head.text-light {{activeService.description}}
+          ul.mlist
+            li.text-light(data-ng-repeat="item in activeService.details")
+              span {{item.content}}
+          br
       .col-md-6.services-pic.text-right.visible-lg.visible-md
-        img.img-responsive(src="/images/services_pic.jpg")
+        //img.img-responsive(src="/images/services_pic.jpg")
 .clearfix
-.row#current-offer.section-promotions.section(ng-show="currentOffer")
-  .container-fluid
+.row#promotions.section-current-offer.section
+  .container-fluid(ng-show="currentOffer")
     h1.title Τρέχουσα προσφορά
     .underliner
     p Περιορισμένου χρόνου
     br
     br
-    .row.section.bg-green(ng-class="{'flex':!isNarrow()}")
+    .row.section.bg-green
       .desktop-content
         table.inner
           tr
@@ -72,7 +74,7 @@
                   | * H προσφορά ισχύει έως &nbsp;
                   span {{currentOffer.validUntil | amUtc | amDateFormat:'DD MMMM'}}
                 .action
-                  button.btn.btn-white(ng-click="openPromotionModal(currentOffer)") ΜΕ ΕΝΔΙΑΦΕΡΕΙ
+                  button.btn.btn-white(ng-click="openCurrentOfferModal(currentOffer)") ΜΕ ΕΝΔΙΑΦΕΡΕΙ
             td.half.col-md-6.hidden-xs
               .tag
                 .tag-cnt
@@ -81,7 +83,7 @@
 
 br
 br
-.row#promotions.section-promotions.section
+.row.section-promotions.section
   .container(style="max-width:980px")
     h1.title Τα πακέτα μας
     .underliner

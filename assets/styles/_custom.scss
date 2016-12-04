@@ -48,6 +48,11 @@ html,body{
   border:2px solid #ccc;
 }
 
+//.has-error{
+//  background-color: lighten($brand-danger,40%);
+//  padding: 15px;
+//}
+
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: #f4f4f4;
 
@@ -391,15 +396,15 @@ a.editable-empty:focus,
   text-decoration: none;
 }
 
-input[type="number"].ng-valid {
-  border-color: green;
-  color: green;
-}
-
-input[type="number"].ng-invalid {
-  border-color: red;
-  color: red;
-}
+//input[type="number"].ng-valid {
+//  border-color: green;
+//  color: green;
+//}
+//
+//input[type="number"].ng-invalid {
+//  border-color: red;
+//  color: red;
+//}
 
 .elipsize {
   overflow: hidden;
@@ -525,6 +530,10 @@ input[type="number"].ng-invalid {
 
 .section-full{
   height: 100vh;
+}
+
+.section-60{
+  height: 60vh;
 }
 
 .section {
@@ -726,12 +735,33 @@ input[type="number"].ng-invalid {
 }
 
 .service-details{
+  background-image: url("../images/services_pic.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: relative;
+  .services-pic {
+
+  }
+
+  .patch{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    width: 50%;
+    background-color: $green;
+  }
+
   min-height: 120px;
   margin-top:-2px;
-  background-color: $green;
   border-top: 10px solid $dark-green;
-  border-bottom: 10px solid $dark-green;
+  //border-bottom: 10px solid $dark-green;
 
+  .cntnt{
+    min-height: 380px;
+    background-color: $green;
+  }
   .services-pic{
     padding: 0;
   }
@@ -1157,8 +1187,20 @@ th {
 //}
 
 
+.current-offer-modal {
+  .current-offer-badge {
+    border: 3px dashed $green;
+    border-radius: 5px;
+    padding:1em;
+    background-color: lighten($green,63%)
+  }
+}
 
-#current-offer {
+.close {
+  color: #333 !important;
+}
+
+.section-current-offer {
   .desktop-content{
     position: relative;
     max-height:500px;
@@ -1179,7 +1221,7 @@ th {
 
         &:first-child{
           padding: 50px 25px;
-          border-right: 5px solid $dark-green;
+          border-right: 10px solid $dark-green;
         }
 
         &:last-child {
@@ -1234,3 +1276,13 @@ th {
 
 
 
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}

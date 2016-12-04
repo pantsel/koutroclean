@@ -86,12 +86,12 @@ html
                   | &nbsp;&nbsp;LOGOUT
     .container-fluid(ng-cloak).init-hidden.main-wrapper
       div.main-view(ng-view='')
-      .row.footer.clearfix(ng-show="$location.$$path == '/' || $location.$$path.indexOf('blog') > -1",ng-class="{'footer-auto':isNarrow()}")
+      .row.footer.clearfix(ng-controller='NavController',ng-show="$location.$$path == '/' || $location.$$path.indexOf('blog') > -1",ng-class="{'footer-auto':isNarrow()}")
         .container
           .row
             .col-md-3
               h5 BCGS
-              p.text-sm Lorem ipsum dolor sit lamer papoua nea guinea. Lorem ipsum dolor sit lamer papoua nea guinea. Lorem ipsum dolor sit lamer papoua nea guinea
+              p.text-sm Η εταιρία Building Cleaning and General Services ιδρύθηκε το 1996 και εδώ και είκοσι χρόνια παρέχει άριστης ποιότητας υπηρεσίες καθαρισμού.
             .col-md-3
             .col-md-3.links
               .row
@@ -102,8 +102,8 @@ html
               .row
                 .col-md-6
                   a(href="#",ng-click="scrollTo('services')") ΥΠΗΡΕΣΙΕΣ
-                .col-md-6
-                  a(href="#",ng-click="scrollTo('block')") BLOG
+                .col-md-6(ng-show="posts.length")
+                  a(href="/blog",ng-click="scrollTo('blog')") BLOG
               br
             .col-md-3.contact
               p

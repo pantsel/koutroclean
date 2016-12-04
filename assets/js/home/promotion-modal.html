@@ -2,20 +2,30 @@
     <!--<h3 class="modal-title" id="modal-title">Προσφορά: {{$ctrl.promotion.slot.toUpperCase()}}</h3>-->
 <!--</div>-->
 <div class="modal-body" id="modal-body">
-    <blockquote ng-show="$ctrl.promotion.tagline" ng-bind-html="$ctrl.promotion.text"></blockquote>
     <h3 ng-show="!$ctrl.promotion.text" class="green">Σας ενδιαφέρει η {{$ctrl.promotion.slot.toUpperCase()}} προσφορά;</h3>
+    <h3 ng-show="$ctrl.promotion.text" class="green">{{$ctrl.promotion.title}}</h3>
 
+    <blockquote ng-show="$ctrl.promotion.text">
+        {{$ctrl.promotion.tagline}}
+    </blockquote>
     <p>Συμπληρώστε το όνομα και το τηλέφωνό σας και θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατόν!</p>
     <br>
 
     <form>
-        <div class="form-group">
-            <label>Όνομα/Επώνυμο</label>
-            <input type="text" ng-model="$ctrl.contact.name" class="form-control" placeholder="Πληκτρολογήστε το ονοματεπώνυμό σας...">
+        <div  ng-class="{'has-error' : $ctrl.errors.indexOf('name') > -1}"
+                class="form-group">
+            <label>Όνομα/Επώνυμο <span class="text-danger">*</span> </label>
+            <input
+
+                    type="text" ng-model="$ctrl.contact.name" class="form-control" placeholder="Πληκτρολογήστε το ονοματεπώνυμό σας...">
         </div>
-        <div class="form-group">
-            <label>Τηλέφωνο επικοινωνίας</label>
-            <input type="number" ng-model="$ctrl.contact.phone" class="form-control"  placeholder="Πληκτρολογήστε τηλέφωνο...">
+        <div
+                ng-class="{'has-error' : $ctrl.errors.indexOf('phone') > -1}"
+                class="form-group">
+            <label>Τηλέφωνο επικοινωνίας <span class="text-danger">*</span></label>
+            <input
+
+                    type="number" ng-model="$ctrl.contact.phone" class="form-control"  placeholder="Πληκτρολογήστε τηλέφωνο...">
         </div>
         <div class="form-group">
             <label>Τί ώρες επιθυμείτε να επικοινωνήσουμε;</label>

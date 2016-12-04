@@ -16,7 +16,9 @@ var EmailsController = {
     createEmail : function(req,res) {
 
         Email.create(req.body).exec(function createCB(err, created){
-            if(err) return res.negotiate(err);
+            if(err) return res.badRequest({
+                message : "Το email δεν είναι έγκυρο."
+            });
             return res.json(created)
         });
     },

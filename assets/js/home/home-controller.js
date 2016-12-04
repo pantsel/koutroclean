@@ -102,11 +102,69 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
             sr.reveal('.section-about-inner')
             sr.reveal('.social a',{origin: 'bottom'},70)
             sr.reveal('.section-services .container')
+            sr.reveal('.section-current-offer .container-fluid')
             sr.reveal('.section-promotions .container')
             sr.reveal('.section-blog .container')
             sr.reveal('.blog-post',{origin: 'bottom',distance : '50px'},100)
             sr.reveal('.services-pic',{origin: 'right'})
             sr.reveal('.service-details .cntnt',{origin: 'left'})
+        }
+
+        $scope.openCurrentOfferModal = function(currentOffer) {
+
+                $uibModal.open({
+                    animation: true,
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    templateUrl: '/js/home/current-offer-modal.html',
+                    controller: function($scope,$uibModalInstance,DataService,Notification,_currentOffer){
+                        $scope.currentOffer = _currentOffer
+                        $scope.contact = {
+                            name : '',
+                            phone: '',
+                            hours: 'morning'
+                        }
+
+                        console.log(" $scope.currentOffer", $scope.currentOffer)
+
+                        $scope.ok = function () {
+
+                            $scope.errors = []
+
+                            if(!$scope.contact.name || !$scope.contact.phone) {
+                                if(!$scope.contact.name) $scope.errors.push('name')
+                                if(!$scope.contact.phone) $scope.errors.push('phone')
+                                Notification.error("Δεν έχετε συμπληρώσει τα απαραίτητα πεδία.")
+                                return false;
+                            }
+
+                            $scope.submitting = true;
+
+                            DataService.submitOfferInterest({
+                                promotion : $scope.currentOffer,
+                                contact : $scope.contact
+                            }).then(function(success){
+                                $scope.submitting = false;
+                                $uibModalInstance.close();
+                            }).catch(function(err){
+                                $scope.submitting = false;
+                            })
+
+                        };
+
+                        $scope.close = function () {
+                            $uibModalInstance.close();
+
+                        };
+
+                    },
+                    size: 'lg',
+                    resolve: {
+                        _currentOffer: function () {
+                            return currentOffer;
+                        }
+                    }
+                });
         }
 
 
@@ -128,9 +186,11 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
 
                     $ctrl.ok = function () {
 
-
+                        $ctrl.errors = []
 
                         if(!$ctrl.contact.name || !$ctrl.contact.phone) {
+                            if(!$ctrl.contact.name) $ctrl.errors.push('name')
+                            if(!$ctrl.contact.phone) $ctrl.errors.push('phone')
                             Notification.error("Δεν έχετε συμπληρώσει τα απαραίτητα πεδία.")
                             return false;
                         }

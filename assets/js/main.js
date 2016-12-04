@@ -7,7 +7,7 @@ angular.module('app', [
     'duScroll',
     'ui.router',
     'ui.tinymce',
-    'ngCookies'
+    'ngCookies',
   ])
     .directive('errSrc', function() {
       return {
@@ -60,6 +60,11 @@ angular.module('app', [
       key: 'AIzaSyA33F1KN83lF7EZCNPhEsLxdU_-qhOeUV8',
     });
   })
+    .config(['$animateProvider', function($animateProvider){
+        // restrict animation to elements with the bi-animate css class with a regexp.
+        // note: "bi-*" is our css namespace at @Bringr.
+        $animateProvider.classNameFilter(/^((?!(fa-spinner)).)*$/);
+    }])
   .config(['$routeProvider', '$locationProvider', 'NotificationProvider',
     function($routeProvider, $locationProvider, NotificationProvider) {
       $routeProvider

@@ -408,6 +408,43 @@ angular.module('app.core.data.service', [
             });
         };
 
+        self.deleteBlogCategory = function(category) {
+
+
+            return $http({
+                url: '/api/blog/categories/' + category.id,
+                method: "DELETE"
+            }).then(function(response) {
+                return response;
+            }, function(response) {
+
+                var errorTitle = 'Unable to delete category';
+
+                showErrors(response, errorTitle);
+
+                return $q.reject(response);
+            });
+        };
+
+        self.createBlogCategory = function(category) {
+
+
+            return $http({
+                url: '/api/blog/categories',
+                method: "POST",
+                data: category
+            }).then(function(response) {
+                return response;
+            }, function(response) {
+
+                var errorTitle = 'Unable to create category';
+
+                showErrors(response, errorTitle);
+
+                return $q.reject(response);
+            });
+        };
+
         self.queryBlogCategories = function(query) {
 
 

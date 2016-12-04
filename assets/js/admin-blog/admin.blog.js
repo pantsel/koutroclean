@@ -95,6 +95,65 @@ angular.module('app.admin.blog',[
                 },1000);
             }
 
+            $scope.deleteCategory = function(cat) {
+
+                var r = confirm("Θέλετε σίγουρα να διαγράψετε την επιλεγμένη κατηγορία;");
+                if (r == true) {
+                    DataService.deleteBlogCategory(cat)
+                        .then(function(success){
+                            getBlogCategories();
+                        })
+                }
+            }
+
+
+            $scope.openCategoryModal = function(category) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    templateUrl: '/js/admin-blog/category-modal.html',
+                    controller: function($uibModalInstance,DataService,category){
+                        var $ctrl = this
+                        $ctrl.category = category || {}
+
+                        $ctrl.ok = function () {
+                            DataService.createBlogCategory($ctrl.category)
+                                .then(function(success){
+                                    $uibModalInstance.dismiss('ok');
+
+                                }).catch(function(err){
+
+                            })
+
+
+
+                        };
+
+                        $ctrl.cancel = function () {
+                            $uibModalInstance.dismiss('cancel');
+                        };
+
+
+                    },
+                    controllerAs: '$ctrl',
+                    size: 'sm',
+                    resolve: {
+                        category: function () {
+                            return category;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (action) {
+
+                }, function (action) {
+                    if(action == 'ok') {
+                        getBlogCategories()
+                    }
+                });
+            }
+
             /**
              * -----------------------------------------
              * Functions

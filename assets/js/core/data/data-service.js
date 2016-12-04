@@ -75,7 +75,7 @@ angular.module('app.core.data.service', [
        *                               Contains the response object.
        */
       self.createVersion = function(version) {
-        console.info('Creating version',version)
+        $log.debug('Creating version',version)
         if (!version) {
           throw new Error('A version object is required for creation');
         }
@@ -150,7 +150,7 @@ angular.module('app.core.data.service', [
         self.getPromotions = function() {
             return $http.get('/api/promotions')
                 .then(function(response) {
-                    console.log("Retrieve Promotions",response)
+                    $log.debug("Retrieve Promotions",response)
                     return response;
                 }, function(response) {
 
@@ -231,7 +231,7 @@ angular.module('app.core.data.service', [
 
       self.upsertService = function(service) {
 
-          console.log("service",service)
+          $log.debug("service",service)
         return $http.post('/api/services', service)
             .then(function(response) {
               Notification.success('Service upserted Successfully.');
@@ -270,7 +270,7 @@ angular.module('app.core.data.service', [
       self.upsertProfile = function(data) {
 
         data['version'] = "initital"
-        console.log("DATA",data)
+        $log.debug("DATA",data)
 
         return $http.post('/api/profile', data)
             .then(function(response) {

@@ -125,7 +125,7 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
                             hours: 'morning'
                         }
 
-                        console.log(" $scope.currentOffer", $scope.currentOffer)
+                        $log.debug(" $scope.currentOffer", $scope.currentOffer)
 
                         $scope.ok = function () {
 

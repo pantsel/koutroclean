@@ -1,5 +1,7 @@
 angular.module('app.core.nav', [])
-  .controller('NavController', ['$scope','$location','$document','$rootScope','$timeout', function($scope, $location, $document, $rootScope, $timeout) {
+  .controller('NavController',
+      ['$scope','$location','$document','$rootScope','$timeout','$log',
+          function($scope, $location, $document, $rootScope, $timeout,$log) {
     //$scope.shouldHideNavMobile = true;
     //$scope.toggleNavMobile = function() {
     //  $scope.shouldHideNavMobile = !$scope.shouldHideNavMobile;
@@ -9,7 +11,7 @@ angular.module('app.core.nav', [])
     //};
       $scope.activeSection = "";
       $rootScope.$on( "$routeChangeSuccess", function(event, next, current) {
-          console.log("$routeChangeSuccess:next",next)
+          $log.debug("$routeChangeSuccess:next",next)
 
           if(next.$$route.originalPath !== '/') {
               $scope.activeSection = next.$$route.name || ""

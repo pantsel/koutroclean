@@ -51,6 +51,9 @@ angular.module('app', [
       return result;
     };
   })
+    .config(function($logProvider){
+        $logProvider.debugEnabled(false);
+    })
   .config(['$localStorageProvider',
     function ($localStorageProvider) {
       $localStorageProvider.setKeyPrefix('koutro-');
@@ -141,7 +144,7 @@ angular.module('app', [
       }
 
       DataService.getSettings().then(function(response){
-        $log.debug('Retrieved Settings: ',response)
+        //$log.debug('Retrieved Settings: ',response)
         $scope.settings = response.data
 
         $scope.socials = []
@@ -162,7 +165,7 @@ angular.module('app', [
         perPage : 4
       }).then(function(success){
 
-        console.log("Retrieved posts!",success)
+        //console.log("Retrieved posts!",success)
         $scope.posts = success.data.posts
         $scope.pagination = success.data.meta.paginate
       }).catch(function(error){
@@ -182,7 +185,7 @@ angular.module('app', [
 
 
         }, function(response) {
-            $log.debug("$scope.currentOffer fetch error",response)
+            //$log.debug("$scope.currentOffer fetch error",response)
         });
 
 

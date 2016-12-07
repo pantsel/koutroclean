@@ -152,7 +152,7 @@ br
           input.form-control(type="text",name="email",ng-model='newsletter.email',placeholder="Το email σας...")
         button.btn.btn-white(ng-click="saveEmail()") ΕΓΓΡΑΦΗ
 .row#contact.section-contact.section
-  ui-gmap-google-map.visible-lg.visible-md(ng-if="settings",center='map.center' zoom='map.zoom')
+  ui-gmap-google-map.visible-lg.visible-md(center='map.center' zoom='map.zoom')
     ui-gmap-marker(coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id")
   .container
     .col-md-6

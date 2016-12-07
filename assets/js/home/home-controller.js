@@ -6,8 +6,8 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
         controller: 'HomeController as vm',
       });
   }])
-  .controller('HomeController', ['$scope','InitializationService','DataService','$uibModal','$log','Notification',
-    function($scope,InitializationService,DataService,$uibModal,$log,Notification) {
+  .controller('HomeController', ['$scope','InitializationService','DataService','$uibModal','$log','Notification','uiGmapGoogleMapApi',
+    function($scope,InitializationService,DataService,$uibModal,$log,Notification,uiGmapGoogleMapApi) {
 
         $('<img/>').attr('src', '../images/bg_grass.jpg').on('load',function() {
             $(this).remove();
@@ -61,20 +61,22 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
 
 
 
-        if($scope.settings) {
-            $scope.map = { center: { latitude: $scope.settings.addressLat, longitude: $scope.settings.addressLon }, zoom: 16 };
+
+
+        uiGmapGoogleMapApi.then(function(maps){
+
             $scope.marker = {
                 id: 0,
                 coords: {
-                    latitude: $scope.settings.addressLat,
-                    longitude: $scope.settings.addressLon
+                    latitude: $scope.map.center.latitude,
+                    longitude: $scope.map.center.longitude,
                 },
                 options: {
                     draggable: false,
                     icon:'/images/map-marker.png'
                 }
             };
-        }
+        })
 
 
         $scope.newsletter = {

@@ -173,6 +173,8 @@ angular.module('app', [
                   })
               })
           }
+
+          $scope.map = { center: { latitude: $scope.settings.addressLat, longitude: $scope.settings.addressLon }, zoom: 16 };
       })
 
 

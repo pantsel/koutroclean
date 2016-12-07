@@ -17,6 +17,16 @@ html
     // STYLES
     link(rel="stylesheet", href="/styles/importer.css")
     // STYLES END
+
+    // Google analyics
+    script
+      | (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      | (i[r].q=i[r].q || []).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      | m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      | })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      | ga('create', 'UA-88665360-1', 'auto');
+      | ga('send', 'pageview');
+
   body(ng-controller='MainController as main')
     .initialization-spinner-wrapper.flex.flex-column.center-aligner(ng-if="$location.$$path == '/'")
       div.spinner.initialization-spinner
@@ -108,7 +118,8 @@ html
             .col-md-3.contact
               p
                 i.fa.fa-mobile
-                | &nbsp;&nbsp;{{settings.phone}}
+                small
+                  | &nbsp;&nbsp;{{settings.phone}}
               p
                 i.fa.fa-envelope
                 | &nbsp;&nbsp; {{settings.email}}
@@ -119,7 +130,7 @@ html
             .col-xs-6.col
               p.text-sm
                 i.fa.fa-fw.fa-copyright
-                |  2016 by
+                |  2016 BCGS | Created by
                 a(href='http://subprimead.com/',target="_blank") &nbsp;Subprime A.D.
             .col-xs-6.col
               p.text-sm.social

@@ -60,7 +60,7 @@ angular.module('app', [
     }])
   .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
-      key: 'AIzaSyA33F1KN83lF7EZCNPhEsLxdU_-qhOeUV8',
+      key: 'AIzaSyBcGG5inWsXj0veWuerygM6cnEiAHSz01g',
     });
   })
     .config(['$animateProvider', function($animateProvider){

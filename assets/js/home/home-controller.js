@@ -240,6 +240,11 @@ angular.module('app.home', ['uiGmapgoogle-maps',])
             if(!$scope.contact.email) {
                 $scope.contactErrors.push('email')
             }
+
+            if(!$scope.contact.phone) {
+                $scope.contactErrors.push('phone')
+            }
+
             if(!$scope.contact.text) {
                 $scope.contactErrors.push('text')
             }

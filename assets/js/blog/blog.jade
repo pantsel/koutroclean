@@ -51,7 +51,7 @@
                 p.blog-post-excerpt(ng-bind-html="post.excerpt")
                 a(ng-href="/blog/posts/{{post.alias}}").btn.btn-green-inverted ΔΕΙΤΕ ΠΕΡΙΣΣΟΤΕΡΑ
       .col-md-12.pagi
-        ul(uib-pagination, total-items="pagination.totalCount", ng-model="pagination.currentPage", max-size="8",boundary-links="true", force-ellipses="true",ng-change="pageChanged()")
+        ul(uib-pagination, next-text="Επόμενο",last-text="Τέλος",first-text="Αρχή",previous-text="Προηγούμενο", total-items="pagination.totalCount", ng-model="pagination.currentPage", max-size="8",boundary-links="true", force-ellipses="true",ng-change="pageChanged()")
 
 
 

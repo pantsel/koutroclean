@@ -40,19 +40,36 @@ var ContactController = {
             return hours;
         }
 
-        var html = '<p>Όνομα: ' + req.body.contact.name + '</p>' +
-            '<p>Τηλέφωνο επικοινωνίας: ' + req.body.contact.phone + '</p>' +
-            '<p>Προσφορά: ' + ( req.body.promotion.slot || req.body.promotion.title )+ '</p>' +
-            '<p>Επιθυμητές ώρες επικοινωνίας : ' + translateHours(req.body.contact.hours) + '</p>'
+        var html = '<h3>Εκδηλώθηκε ενδιαφέρον για κάποια από τις υπηρεσίες σας.</h3>'
+
+        html += '<table>' +
+            '<tr>' +
+            '<th style="text-align: left">Όνομα ενδιαφερόμενου</th>' +
+            '<td>' + req.body.contact.name + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<th style="text-align: left">Τηλέφωνο επικοινωνίας</th>' +
+            '<td>' + req.body.contact.phone + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<th style="text-align: left">Υπηρεσία/Προσφορά</th>' +
+            '<td>' + ( req.body.promotion.slot || req.body.promotion.title )+ '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<th style="text-align: left">Επιθυμητές ώρες επικοινωνίας</th>' +
+            '<td>' + translateHours(req.body.contact.hours) + '</td>' +
+            '</tr>' +
+            '</table>'
 
         if(req.body.promotion.title) {
             html += "<hr>"
+            html += "<h3>Περιγραφή</h3>"
             html += req.body.promotion.text
         }
 
         // setup e-mail data with unicode symbols
         var mailOptions = {
-            from: '"BCGS Admin ?" <admin@BCGS.gr>', // sender address
+            from: '"BCGS Admin" <admin@BCGS.gr>', // sender address
             to: process.env.ADMIN_EMAILS, // list of receivers
             subject: 'Νέα υποβολή φόρμας ενδιαφέροντος από  BCGS.gr', // Subject line
             html: html
@@ -81,11 +98,12 @@ var ContactController = {
 
         // setup e-mail data with unicode symbols
         var mailOptions = {
-            from: '"BCGS Admin ?" <admin@BCGS.gr>', // sender address
+            from: '"BCGS Admin" <admin@BCGS.gr>', // sender address
             to: process.env.ADMIN_EMAILS, // list of receivers
             subject: 'Νέα υποβολή φόρμας επικοινωνίας από  BCGS.gr', // Subject line
             html: '<p>Όνομα: ' + req.body.name + '</p>' +
             '<p>Email: ' + req.body.email + '</p>' +
+            '<p>Τηλέφωνο επικοινωνίας: ' + req.body.phone + '</p>' +
             '<h3>Κείμενο</h3>' +  req.body.text
         };
 

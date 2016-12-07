@@ -87,7 +87,12 @@ br
   .container(style="max-width:980px")
     h1.title Τα πακέτα μας
     .underliner
-    p Εδώ απεικονίζονται ενδεικτικά τα πακέτα προσφορών της εταιρείας
+    p(ng-controller="NavController") * Τα παρακάτω πακέτα ισχύουν για κτήρια έως και 4 ορόφων.
+      br
+      | Εάν ενδιαφέρεστε για μια εξατομικευμένη προσφορά,
+      | &nbsp;
+      strong
+        a(href="#",ng-click="scrollTo('contact')") επικοινωνήστε μαζί μας.
     br
     br
     .row(ng-class="{'flex':!isNarrow()}")
@@ -147,7 +152,7 @@ br
           input.form-control(type="text",name="email",ng-model='newsletter.email',placeholder="Το email σας...")
         button.btn.btn-white(ng-click="saveEmail()") ΕΓΓΡΑΦΗ
 .row#contact.section-contact.section
-  ui-gmap-google-map.visible-lg.visible-md(center='map.center' zoom='map.zoom')
+  ui-gmap-google-map.visible-lg.visible-md(ng-if="settings",center='map.center' zoom='map.zoom')
     ui-gmap-marker(coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id")
   .container
     .col-md-6
@@ -177,6 +182,10 @@ br
           .col-md-6
             .form-group(ng-class="{'has-error' : contactErrors.indexOf('email') > -1}")
               input.form-control(ng-model="contact.email",type="email",name="contactEmail",placeholder="Email")
+        .row
+          .col-md-12
+            .form-group(ng-class="{'has-error' : contactErrors.indexOf('phone') > -1}")
+              input.form-control(type="number",ng-model="contact.phone",rows="5",placeholder="Τηλέφωνο επικοινωνίας...")
         .row
           .col-md-12
             .form-group(ng-class="{'has-error' : contactErrors.indexOf('text') > -1}")

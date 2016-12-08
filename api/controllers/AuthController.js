@@ -5,6 +5,7 @@
 
 var AuthController = {
     login: function(req, res) {
+
         AuthService.authenticate(
             req,
             sails.config.auth,

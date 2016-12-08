@@ -29,16 +29,25 @@
 
 module.exports = {
 
+    port: process.env.PORT || 1337,
+    host: process.env.IP || '127.0.0.1',
+    environment: process.env.ENV || 'development',
+
+    hookTimeout: 50000, // 50 seconds
+
+    //
     // The full base url at which your site will be primarily available.
     // Include an http:// prefix
     // ex. 'http://my-site.com'
-    appUrl: 'http://localhost:1337',
+    appUrl: process.env.APP_URL || 'http://localhost:1337',
+
+
 
     auth: {
         // Provide a set of credentials that can be used to access the admin interface.
         static: {
-            username: 'admin',
-            password: 'admin'
+            username: process.env.ADMIN_LOGIN,
+            password: process.env.ADMIN_PASS,
         },
         custom : {
 
@@ -52,40 +61,28 @@ module.exports = {
             token_secret: '2022C08D2F793C9ECF2AA366277DBBC07B86DCE82AC92DAAE79AC01DD3C92304'
         },
 
+        //
         connections: {
-
-            /**
-             * Users database
-             */
-            usersDB : {
-                adapter    : 'sails-mysql',
-                host      : 'localhost',
-                port      : 3306,
-                user      : 'root',
-                password  : '',
-                database  : 'demoapp'
-
-            },
             mongodb: {
                 adapter: 'sails-mongo',
-                host: 'localhost', // defaults to `localhost` if omitted
-                port: 27017, // defaults to 27017 if omitted
-                //user: 'username_here', // or omit if not relevant
-                //password: 'password_here', // or omit if not relevant
-                database: 'release-server' // or omit if not relevant
+                host: process.env.MONGODB_DB_HOST || '127.0.0.1', // defaults to `localhost` if omitted
+                port: process.env.MONGODB_DB_PORT || '27017', // defaults to 27017 if omitted
+                user: process.env. MONGODB_DB_USERNAME || null, // or omit if not relevant
+                password: process.env. MONGODB_DB_PASSWORD || null, // or omit if not relevant
+                database: 'koutrocleandemo' // or omit if not relevant
             }
         },
 
         session: {
             // Recommended: 63 random alpha-numeric characters
             // Generate using: https://www.grc.com/passwords.htm
-            adapter : 'mongo',
-            url: "mongodb://localhost/release-server",
+            adapter : 'connect-mongo',
+            url: process.env.MONGODB_DB_URL ? process.env.MONGODB_DB_URL + "koutrocleandemo" : "mongodb://@localhost:27017/koutrocleandemo",
             secret: 'cdf93c72c05f104f6183613e2f8262c2',
-            database: 'release-server',
-            host: 'localhost',
-            //user: 'DATABASE_USERNAME',
-            //password: 'DATABASE_PASSWORD',
+            database: 'koutrocleandemo',
+            host: process.env.MONGODB_DB_HOST || 'localhost',
+            user: process.env. MONGODB_DB_USERNAME || null, // or omit if not relevant
+            password: process.env. MONGODB_DB_PASSWORD || null, // or omit if not relevant
             collection: 'sessions',
             auto_reconnect: false,
             ssl: false,

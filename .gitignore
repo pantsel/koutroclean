@@ -125,3 +125,4 @@ nbproject
 /assets/bower_components/
 /.env
 /email.txt
+/config/local.js

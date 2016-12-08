@@ -77,8 +77,6 @@ module.exports = {
         },
 
         session: {
-            // Recommended: 63 random alpha-numeric characters
-            // Generate using: https://www.grc.com/passwords.htm
             adapter : 'connect-mongo',
             url: process.env.MONGODB_DB_URL,
             secret: process.env.SESSION_SECRET,

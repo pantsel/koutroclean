@@ -114,5 +114,8 @@ module.exports.routes = {
 
 
 
+  'get /sitemap' : 'SitemapController.sitemap',
+
+
 
 };

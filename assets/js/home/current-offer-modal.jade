@@ -4,8 +4,8 @@
         i.fa.fa-tag
         | &nbsp;
         | {{currentOffer.tagline}}
-.modal-body.current-offer-modal.row-eq-height
-   .col-md-6.current-offer-badge
+.modal-body.current-offer-modal
+   .col-md-6.current-offer-badge(style="margin-bottom:15px")
        h3.title.green {{currentOffer.title}}
        div(ng-bind-html="currentOffer.text")
        br
@@ -13,6 +13,7 @@
            strong
                | * H προσφορά ισχύει έως &nbsp;
                span {{currentOffer.validUntil | amUtc | amDateFormat:'DD MMMM'}}
+       br
    .col-md-6
        p Συμπληρώστε το όνομα και το τηλέφωνό σας και θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατόν!
        form

@@ -32,6 +32,10 @@ module.exports.policies = {
     home : true
   },
 
+  SitemapController : {
+    sitemap : true
+  },
+
   AuthController : {
     login : true
   },

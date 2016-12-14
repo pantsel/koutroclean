@@ -59,7 +59,7 @@
     "debug": "node debug app.js",
     "start": "node app.js",
     "postdeploy": "npm install",
-    "postinstall": "HOME=$OPENSHIFT_REPO_DIR bower install || bower install"
+    "postinstall": "bower install --allow-root"
   },
   "main": "app.js",
   "author": {

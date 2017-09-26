@@ -1,19 +1,32 @@
-.container.ike
+.container.blog
     .row
-        .col-md-12
-            h1 BUILDING CLEANING AND GENERAL SERVICES
-            br
+        .col-md-12.blog-page-header.text-center
+            h1
+                small
+                | Εταιρεία
+            div.underliner
+    br
+    br
     .row
         .col-md-7
             h2 2016
-            p
-            a(href='https://drive.google.com/open?id=0B96vlSMUwwQcMTBZU29DVG52S3M',target="_blank") &nbsp;ΙΣΟΛΟΓΙΣΜΟΣ
+            ul
+                li
+                    a(href='https://drive.google.com/open?id=0B96vlSMUwwQcMTBZU29DVG52S3M',target="_blank") &nbsp;ΙΣΟΛΟΓΙΣΜΟΣ
+
         .col-md-5
-            h3 ΣΤΟΙΧΕΙΑ ΕΠΙΧΕΙΡΗΣΗΣ
-            table.table.table-ike(style="background-color:#eaeaea")
-                tr(ng-repeat="item in details")
-                    th {{item.key}}:
-                    td(ng-bind-html="item.value")
+            .panel.panel-default
+                .panel-heading
+                    .panel-title
+                        | Στοιχεία επιχείρησης
+                table.table.table-ike
+                    tr(ng-repeat="item in details")
+                        th {{item.key}}:
+                        td(ng-bind-html="item.value")
+    br
+    br
+    br
+    br
 
 
 

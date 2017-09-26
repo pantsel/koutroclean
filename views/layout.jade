@@ -33,7 +33,7 @@ html
         div.double-bounce1
         div.double-bounce2
     .header(ng-cloak).init-hidden
-      .navbar.navbar-default.navbar-fixed-top(role='navigation',ng-show="$location.$$path == '/' || $location.$$path.indexOf('blog') > -1",ng-controller='NavController')
+      .navbar.navbar-default.navbar-fixed-top(role='navigation',ng-show="$location.$$path == '/' || $location.$$path.indexOf('blog') > -1 || $location.$$path.indexOf('ike') > -1",ng-controller='NavController')
         .container-fluid
           .navbar-header
             button.navbar-toggle.collapsed(ng-init="navCollapsed = true",ng-click="navCollapsed = !navCollapsed")
@@ -96,7 +96,7 @@ html
                   | &nbsp;&nbsp;LOGOUT
     .container-fluid(ng-cloak).init-hidden.main-wrapper
       div.main-view(ng-view='')
-      .row.footer.clearfix(ng-controller='NavController',ng-show="$location.$$path == '/' || $location.$$path.indexOf('blog') > -1",ng-class="{'footer-auto':isNarrow()}")
+      .row.footer.clearfix(ng-controller='NavController',ng-show="$location.$$path == '/' || $location.$$path.indexOf('blog') > -1 || $location.$$path.indexOf('ike') > -1",ng-class="{'footer-auto':isNarrow()}")
         .container
           .row
             .col-md-3
@@ -133,7 +133,7 @@ html
                 |  2016 BCGS |
                 a(href='ike',target="_blank") &nbsp;Εταιρεία
                 | &nbsp;| Created by
-                a(href='http://subprimead.com/',target="_blank") &nbsp;Subprime A.D. |
+                a(href='http://subprimead.com/',target="_blank") &nbsp;Subprime A.D.
 
             .col-xs-6.col
               p.text-sm.social

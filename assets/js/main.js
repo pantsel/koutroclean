@@ -4,6 +4,7 @@ angular.module('app', [
     'app.home',
     'app.blog',
     'app.blog.post',
+    'app.ike',
     'duScroll',
     'ui.router',
     'ui.tinymce',

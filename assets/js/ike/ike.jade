@@ -1,0 +1,20 @@
+.container.ike
+    .row
+        .col-md-12
+            h1 BUILDING CLEANING AND GENERAL SERVICES
+            br
+    .row
+        .col-md-8
+            h2 2016
+            p
+            a(href='https://drive.google.com/open?id=0B96vlSMUwwQcMTBZU29DVG52S3M',target="_blank") &nbsp;ΙΣΟΛΟΓΙΣΜΟΣ
+        .col-md-4
+            h3 ΣΤΟΙΧΕΙΑ ΕΠΙΧΕΙΡΗΣΗΣ
+            table.table.table-ike(style="background-color:#eaeaea")
+                tr(ng-repeat="item in details")
+                    th {{item.key}}:
+                    td(ng-bind-html="item.value")
+
+
+
+

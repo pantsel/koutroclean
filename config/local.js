@@ -36,7 +36,7 @@ module.exports = {
     host: process.env.IP,
     environment: process.env.ENV,
 
-    hookTimeout: 50000, // 50 seconds
+    hookTimeout: 60000, // 50 seconds
 
     //
     // The full base url at which your site will be primarily available.

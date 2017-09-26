@@ -29,6 +29,7 @@ module.exports.routes = {
   'GET /': 'AppController.home',
   'GET /blog': 'AppController.home',
   'GET /blog/posts/:alias': 'AppController.home',
+  'GET /ike': 'AppController.home',
   //'GET /admin': 'AppController.home',
   'GET /admin': { view: 'admin' },
   'GET /admin/profile': { view: 'admin' },

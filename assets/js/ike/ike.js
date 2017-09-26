@@ -25,11 +25,15 @@ angular.module('app.ike',[
             $scope.details = [
                 {
                     key : "Επωνυμία",
-                    value : "BUILDING CLEANING AND GENERAL SERVICES ΜΟΝΟΠΡΟΣΩΠΗ ΙKE"
+                    value : "BUILDING CLEANING AND GENERAL SERVICES ΙΔΙΩΤΙΚΗ ΚΕΦΑΛΑΙΟΥΧΙΚΗ ΕΤΑΙΡΕΙΑ"
+                },
+                {
+                    key : "Διακρητικός τίτλος",
+                    value : "BCGS Ι.Κ.Ε."
                 },
                 {
                     key : "Δραστηριότητα",
-                    value : "ΥΠΗΡΕΣΙΕΣ ΓΕΝΙΚΟΥ ΚΑΘΑΡΙΣΜΟΥ ΚΤΙΡΙΩΝ"
+                    value : "ΔΙΑΧΕΙΡΙΣΗ ΚΑΙ ΕΞΥΠΗΡΕΤΗΣΗ ΚΤΙΡΙΩΝ"
                 },
                 {
                     key : "Α.Φ.Μ",
@@ -37,11 +41,11 @@ angular.module('app.ike',[
                 },
                 {
                     key : "Δ.Ο.Υ",
-                    value : "ΑΘΗΝΩΝ ΙΓ΄"
+                    value : "ΙΓ Αθηνών"
                 },
                 {
                     key : "Αριθμός Γ.Ε.Μ.Η",
-                    value : ""
+                    value : "140235203000"
                 },
                 {
                     key : "Διεύθυνση",

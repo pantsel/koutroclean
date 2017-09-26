@@ -14,7 +14,7 @@ html
     // endbower
     
     // STYLES
-    link(rel="stylesheet", href="/min/production.min.css")
+    link(rel="stylesheet", href="/styles/importer.css")
     // STYLES END
   body(ng-controller='AdminController as main')
     .header(ng-cloak,ng-show="$location.$$path.indexOf('admin') > -1")
@@ -61,7 +61,6 @@ html
 
 
     // SCRIPTS
-    script(src="/min/production.min.js")
     script(src="/bower_components/angular/angular.js")
     script(src="/bower_components/angular-cookies/angular-cookies.js")
     script(src="/bower_components/angular-ui-tinymce/src/tinymce.js")

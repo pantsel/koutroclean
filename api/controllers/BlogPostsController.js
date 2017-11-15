@@ -85,7 +85,7 @@ var BlogPostsController = {
             var fileAdapter = SkipperDisk();
 
             // set the filename to the same file as the user uploaded
-            res.set("Content-disposition", "attachment; filename='" + post.filename + "'");
+            // res.set("Content-disposition", "attachment; filename='" + post.filename + "'");
 
             // Stream the file down
             fileAdapter.read(post.fd)

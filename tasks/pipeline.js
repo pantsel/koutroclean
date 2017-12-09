@@ -15,6 +15,8 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
+  '/bower_components/angular-ui-notification/dist/angular-ui-notification.css',
+  '/bower_components/components-font-awesome/css/font-awesome.css',
   'styles/**/*.css'
 ];
 

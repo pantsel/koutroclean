@@ -23,6 +23,7 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
 
+  '/bower_components/scrollreveal/dist/scrollreveal.js',
   '/bower_components/angular/angular.js',
   '/bower_components/angular-cookies/angular-cookies.js',
   'bower_components/angular-ui-tinymce/src/tinymce.js',

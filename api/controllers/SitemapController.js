@@ -3,7 +3,9 @@ module.exports = {
         var fs = require('fs');
 
         var SitemapGenerator = require('sitemap-generator');
-        var generator = new SitemapGenerator('http://bcgs.gr');
+        var generator = new SitemapGenerator('http://bcgs.gr', {
+          stripQuerystring: false
+        });
 
         generator.on('done', function (sitemap) {
             console.log(sitemap);
